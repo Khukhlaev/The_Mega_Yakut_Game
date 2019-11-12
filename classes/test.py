@@ -34,12 +34,13 @@ root.bind("<KeyRelease>", key_release)
 
 
 def game():
-    global platforms, velocity, k
+    global platforms, velocity, k, person
     k += 1
-    if k % 50 == 0:
+    if k % 50 == 0 and velocity > 0:
         platforms += [Platform(canv, 400, 100, 100, 20)]
     for p in platforms:
         p.move(velocity)
+    person.move(velocity)
     root.after(30, game)
 
 

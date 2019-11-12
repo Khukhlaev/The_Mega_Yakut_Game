@@ -6,7 +6,7 @@ class Platform:
 
     def __init__(self, canv, x, y, length, width):
         """
-        Target class constructor
+        Platform class constructor
         """
         self.canvas = canv
         self.live = 1
@@ -17,4 +17,7 @@ class Platform:
         self.id = self.canvas.create_rectangle(x, y, x + length, y + width, fill="Green")
 
     def move(self, velocity):
-        self.canvas.move(self.id, -velocity, 0)
+        if velocity > 0:
+            self.canvas.move(self.id, -velocity, 0)
+
+

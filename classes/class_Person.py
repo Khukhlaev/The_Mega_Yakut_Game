@@ -15,3 +15,7 @@ class Person:
         self.height = height
         self.width = width
         self.id = self.canvas.create_rectangle(x, y, x + width, y + height, fill="Green")
+
+    def move(self, velocity):
+        if velocity < 0:
+            self.canvas.move(self.id, velocity, 0)
