@@ -1,5 +1,0 @@
-1) move classes/class_platform.py from classes/ to objects/
-2) rename objects/class_platform.py to class_Platform.py
-3) move classes/class_Person.py from classes/ to objects/
-4) rename objects/class_Person.py to class_Player.py
-5) add classes/class_Organism to import it in objects/class_Player.py and other living objects
