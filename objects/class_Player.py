@@ -1,4 +1,5 @@
 # importing necessary modules
+from PIL import Image, ImageTk
 
 
 # class body
@@ -14,8 +15,11 @@ class Player:
         self.y = y
         self.height = height
         self.width = width
-        self.id = self.canvas.create_rectangle(x, y, x + width, y + height, fill="Green")
+        img = Image.open("testimport.png") #TODO check if Label works or not
+        render = ImageTk.PhotoImage(img)
+        self.id = Label(canv, image=render)
+        self.id.image = render
 
     def move(self, velocity):
         if velocity < 0:
-            self.canvas.move(self.id, velocity, 0)
+            self.canvas.move(self.id, velocity, 0) #TODO check if it works with images
