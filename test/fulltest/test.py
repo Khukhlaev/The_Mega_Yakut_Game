@@ -2,6 +2,7 @@ import tkinter as tk
 from random import randrange as rnd
 from class_platform import Platform
 from class_Person import Person
+from class_Level import Level
 
 # make window
 root = tk.Tk()

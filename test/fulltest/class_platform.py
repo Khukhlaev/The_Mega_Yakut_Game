@@ -8,7 +8,7 @@ class Platform:
         """
         Platform class constructor
         """
-        self.canvas = canv
+        self.canvas = canv  # May don't give platform opportunity to draw itself
         self.live = 1
         self.x = x
         self.y = y
