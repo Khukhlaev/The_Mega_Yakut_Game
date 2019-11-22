@@ -1,7 +1,5 @@
 import tkinter as tk
-import sys
-sys.path.append('/objects') #TODO fix
-from class_Player import Player
+from objects.class_Player import Player
 
 # make window
 root = tk.Tk()
