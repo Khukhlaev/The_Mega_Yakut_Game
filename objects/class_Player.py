@@ -1,4 +1,5 @@
 # importing necessary modules
+import tkinter as tk
 from PIL import Image, ImageTk
 
 
@@ -15,11 +16,11 @@ class Player:
         self.y = y
         self.height = height
         self.width = width
-        img = Image.open("testimport.png") #TODO check if Label works or not
+        img = Image.open("importtest.png")
         render = ImageTk.PhotoImage(img)
-        self.id = Label(canv, image=render)
+        self.id = tk.Label(canv, image=render)
         self.id.image = render
 
     def move(self, velocity):
         if velocity < 0:
-            self.canvas.move(self.id, velocity, 0) #TODO check if it works with images
+            self.canvas.move(self.id, velocity, 0)
