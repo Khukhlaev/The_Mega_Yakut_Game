@@ -22,6 +22,7 @@ class Level:
         self.draw_all(2)
 
     def check_for_end(self):
+        pass
 
     def game(self):
         while not self.end_level:
