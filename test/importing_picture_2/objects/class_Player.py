@@ -2,24 +2,23 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 
-
 # class body
 class Player:
 
-    def __init__(self, canv, x, y, height, width):
+    def __init__(self, canvas, x, y, height, width):
         """
         Target class constructor
         """
-        self.canvas = canv
+        self.canvas = canvas
         self.live = 1
         self.x = x
         self.y = y
         self.height = height
         self.width = width
-        img = Image.open("importtest.png")
+        img = Image.open("importtest.png") #FIXME ДИЧЬ НАЧИНАЕТСЯ ТУТ
         render = ImageTk.PhotoImage(img)
-        self.id = tk.Label(canv, image=render)
-        self.id.image = render
+        self.id = canvas.create_image(400, 400, image=render)
+        self.id_ = render #FIXME А МАГИЯ ТУТ
 
     def move(self, velocity):
         if velocity < 0:

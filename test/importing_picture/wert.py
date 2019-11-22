@@ -132,13 +132,13 @@ def app():
     initil.image = render
     x_ = 10
     y_ = 10
-    while x_ < 100:
+    '''while x_ < 100:
         initil.config(image = '')
         initil.place(x = x_, y = y_)
         initil = Label(root, image = render)
         initil.image = render
         x_ += 5
-        y_ += 5
+        y_ += 5'''
     initil.place(x = x_, y = y_)
     
     
