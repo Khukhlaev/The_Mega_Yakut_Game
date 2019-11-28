@@ -14,9 +14,9 @@ class Camera:
         self.platforms_id = []
         for platform in platforms:
             self.platforms_id.append(
-                self.canvas.create_rectangle(platform.x, 600 - platform.y,
+                self.canvas.create_rectangle(platform.x, platform.y,
                                              platform.x + platform.width,
-                                             600 - platform.y + platform.height, fill="Green")
+                                             platform.y + platform.height, fill="Green")
             )
         self.player_id = self.canvas.create_rectangle(self.player.x, self.player.y,
                                                       self.player.x + self.player.width,

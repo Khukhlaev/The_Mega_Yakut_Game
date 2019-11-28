@@ -5,7 +5,7 @@
 
 # class body
 class Player:
-    def __init__(self, x, y, height, width):
+    def __init__(self, x, y, width, height):
         """
         PLayer class constructor
         Args:
@@ -15,8 +15,8 @@ class Player:
         self.live = True
         self.x = x  # It is coordinates in natural coordinate system (not canvas coordinate system)
         self.y = y
-        self.height = height
         self.width = width
+        self.height = height
         self.vx = 0
         self.vy = 0
         self.on_platform = True

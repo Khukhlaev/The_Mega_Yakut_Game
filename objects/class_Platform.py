@@ -4,7 +4,7 @@
 # class body
 class Platform:
 
-    def __init__(self, x, y, height, width):
+    def __init__(self, x, y,  width, height):
         """
         Platform class constructor
         Args:
@@ -13,7 +13,6 @@ class Platform:
         """
         self.x = x
         self.y = y
-        self.height = height
         self.width = width
-
+        self.height = height
 
