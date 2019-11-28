@@ -17,5 +17,7 @@ def load_level():
                     platforms.append(Platform(x * width, y * height, width, height))
                 if line[x] == 'P':
                     player = Player(x * width, y * height, width, height)
+        else:
+            y -= 1
         y += 1
     return [player, platforms]

@@ -12,7 +12,7 @@ canvas.pack(fill=tk.BOTH, expand=1)
 
 parameters = load.load_level()
 
-level1 = Level(canvas, 1000, parameters[0], parameters[1], None)
+level1 = Level(root, canvas, 1000, parameters[0], parameters[1], None)
 
 level1.game()
 

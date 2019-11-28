@@ -9,7 +9,8 @@ from classes.class_Camera import Camera
 
 class Level:
 
-    def __init__(self, canvas, length, player, platforms, enemies):
+    def __init__(self, root, canvas, length, player, platforms, enemies):
+        self.root = root
         self.canvas = canvas
         self.length = length  # Length of the level in coordinates units??
         self.camera = Camera(canvas, player, platforms, enemies)
@@ -22,10 +23,12 @@ class Level:
         pass
 
     def bind_all(self):
-        self.canvas.bind("<KeyPress>", self.key_interpretator)
-        self.canvas.bind("<KeyRelease>", self.key_release)
+        print("d")
+        self.root.bind("<KeyPress>", self.key_interpretator)
+        self.root.bind("<KeyRelease>", self.key_release)
 
     def key_interpretator(self, event):
+        print(event.keycode)
         if event.keycode == 39:
             self.player.vx = 5
         if event.keycode == 37:

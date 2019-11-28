@@ -25,4 +25,6 @@ class Camera:
 
     def update(self):
         coordinates = self.canvas.coords(self.player_id)
+        if self.player.vx != 0:
+            self.canvas.move(self.player_id, self.player.vx, self.player.vy)
         self.canvas.update()
