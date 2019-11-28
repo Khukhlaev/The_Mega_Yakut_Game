@@ -6,7 +6,7 @@ class Person:
 
     def __init__(self, canv, x, y, height, width):
         """
-        Target class constructor
+        Person class constructor
         """
         self.canvas = canv
         self.live = 1

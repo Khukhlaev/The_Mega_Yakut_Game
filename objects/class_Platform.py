@@ -16,8 +16,4 @@ class Platform:
         self.width = width
         self.id = self.canvas.create_rectangle(x, y, x + length, y + width, fill="Green")
 
-    def move(self, velocity):
-        if velocity > 0:
-            self.canvas.move(self.id, -velocity, 0)
-
 
