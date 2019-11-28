@@ -4,16 +4,16 @@
 # class body
 class Platform:
 
-    def __init__(self, canv, x, y, length, width):
+    def __init__(self, x, y, height, width):
         """
         Platform class constructor
+        Args:
+            (x, y) - coordinates of the top left point of the rectangle in which the model is enclosed
+            length, width - length and width of this rectangle
         """
-        self.canvas = canv
-        self.live = 1
         self.x = x
         self.y = y
-        self.height = length
+        self.height = height
         self.width = width
-        self.id = self.canvas.create_rectangle(x, y, x + length, y + width, fill="Green")
 
 
