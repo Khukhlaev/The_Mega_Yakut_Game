@@ -27,6 +27,7 @@ class Level:
         self.root.bind("<KeyRelease>", self.key_release)
 
     def key_interpretator(self, event):
+        print(event.keycode)
         if event.keycode == 39:
             self.player.vx = 5
         if event.keycode == 37:
@@ -40,4 +41,4 @@ class Level:
         while not self.end_level:
             self.player.move()
             self.camera.update()
-            sleep(0.01667)
+            sleep(0.03)

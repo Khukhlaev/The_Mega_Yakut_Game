@@ -2,6 +2,7 @@
 
 """
 
+from physics.physics import gravity
 
 # class body
 class Player:
@@ -23,5 +24,12 @@ class Player:
 
 
     def move(self):
+        self.vy = gravity(self.vy, self.on_platform)
         self.x += self.vx
         self.y += self.vy
+
+    def move_left(self):
+        self.vx = -5
+
+    def move_right(self):
+        self.vx = 5
