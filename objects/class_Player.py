@@ -22,6 +22,7 @@ class Player:
         self.vx = 0
         self.vy = 0
         self.on_platform = True
+        self.push_up = False  # Push up player if he is into the platform
 
     def move(self):
         self.vy = gravity(self.vy, self.on_platform)

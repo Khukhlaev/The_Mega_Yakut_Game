@@ -41,4 +41,10 @@ class Camera:
             self.level_x += self.player.vx
         else:
             self.canvas.move(self.player_id, self.player.vx, self.player.vy)
+        if self.player.push_up:
+            self.player.push_up = False
+            self.player.vy = 0
+            print(self.player.push_up)
+            print(self.player.vy)
         self.canvas.update()
+
