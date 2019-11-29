@@ -4,6 +4,7 @@
 
 from physics.physics import gravity
 
+
 # class body
 class Player:
     def __init__(self, x, y, width, height):
@@ -21,7 +22,6 @@ class Player:
         self.vx = 0
         self.vy = 0
         self.on_platform = True
-
 
     def move(self):
         self.vy = gravity(self.vy, self.on_platform)

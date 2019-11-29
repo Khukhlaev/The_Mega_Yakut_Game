@@ -19,19 +19,27 @@ class Level:
         self.enemies = enemies
         self.end_level = False
 
+    def check_for_platform(self):
+        self.player.on_platform = False
+        for platform in self.platforms:
+            if (platform.y == self.player.y + self.player.height) and \
+                    (self.player.x >= platform.x) and \
+                    (self.player.x <= platform.x + platform.width):
+                self.player.on_platform = True
+        print(self.player.on_platform)
+
     def check_for_end(self):
         pass
 
     def bind_all(self):
-        self.root.bind("<KeyPress>", self.key_interpretator)
+        self.root.bind("<KeyPress>", self.key_interpreter)
         self.root.bind("<KeyRelease>", self.key_release)
 
-    def key_interpretator(self, event):
-        print(event.keycode)
+    def key_interpreter(self, event):
         if event.keycode == 39:
-            self.player.vx = 5
+            self.player.move_right()
         if event.keycode == 37:
-            self.player.vx = -5
+            self.player.move_left()
 
     def key_release(self, event):
         self.player.vx = 0
@@ -40,5 +48,6 @@ class Level:
         self.bind_all()
         while not self.end_level:
             self.player.move()
+            self.check_for_platform()
             self.camera.update()
             sleep(0.03)
