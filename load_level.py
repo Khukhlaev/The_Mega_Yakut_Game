@@ -6,7 +6,6 @@ def load_level():
     levelFile = open('levels/level1.txt', 'r')
     height = int(levelFile.readline())
     width = int(levelFile.readline())
-    print(height, width)
     platforms = []
     player = ""
     y = 0

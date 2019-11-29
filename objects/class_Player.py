@@ -21,6 +21,7 @@ class Player:
         self.vy = 0
         self.on_platform = True
 
+
     def move(self):
         self.x += self.vx
         self.y += self.vy
