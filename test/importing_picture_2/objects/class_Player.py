@@ -15,10 +15,10 @@ class Player:
         self.y = y
         self.height = height
         self.width = width
-        img = Image.open("importtest.png") #FIXME ДИЧЬ НАЧИНАЕТСЯ ТУТ
+        img = Image.open("importtest.png")
         render = ImageTk.PhotoImage(img)
         self.id = canvas.create_image(400, 400, image=render)
-        self.id_ = render #FIXME А МАГИЯ ТУТ
+        self.id_ = render
 
     def move(self, velocity):
         if velocity < 0:
