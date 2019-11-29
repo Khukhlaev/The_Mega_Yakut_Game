@@ -33,3 +33,6 @@ class Player:
 
     def move_right(self):
         self.vx = 5
+
+    def jump(self):
+        self.vy = -10
