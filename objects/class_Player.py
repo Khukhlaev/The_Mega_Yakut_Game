@@ -1,4 +1,4 @@
-"""This class will operate only with normal coordinate system (x, y), point (0,0) on the left bottom side of the level
+"""This class will operate with coordinate system (x, y), point (0,0) on the left top side of the level
 
 """
 

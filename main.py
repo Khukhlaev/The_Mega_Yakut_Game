@@ -2,6 +2,11 @@ import tkinter as tk
 from classes.class_Level import Level
 import load_level as load
 
+# make constants
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
+
+
 # make window
 root = tk.Tk()
 root.title('The Mega Yakut Game')
