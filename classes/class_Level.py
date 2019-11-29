@@ -23,10 +23,10 @@ class Level:
         for platform in self.platforms:
             if (platform.y + platform.height / 2 >= self.player.y + self.player.height >= platform.y) and \
                     (self.player.x + self.player.width >= platform.x >= self.player.x - self.player.width):
-                if self.player.push_up:
+                '''if self.player.push_up:
                     self.player.vy = -(self.player.y + self.player.height - platform.y)
                     self.player.push_up = True
-                    print("death")
+                    print("death")'''
                 self.player.on_platform = True
         #print(self.player.on_platform)
 
@@ -42,6 +42,8 @@ class Level:
             self.player.move_right()
         if event.keycode == 37:
             self.player.move_left()
+        if event.keycode == 38:
+            self.player.jump()
 
     def key_release(self, event):
         self.player.vx = 0
