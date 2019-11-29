@@ -3,7 +3,6 @@
 """
 from time import sleep
 
-
 from classes.class_Camera import Camera
 
 
@@ -12,7 +11,7 @@ class Level:
     def __init__(self, root, canvas, length, player, platforms, enemies):
         self.root = root
         self.canvas = canvas
-        self.length = length  # Length of the level in coordinates units??
+        self.length = length  # Length of the level in coordinates units
         self.camera = Camera(canvas, player, platforms, enemies)
         self.player = player
         self.platforms = platforms
@@ -22,10 +21,10 @@ class Level:
     def check_for_platform(self):
         self.player.on_platform = False
         for platform in self.platforms:
-            if (platform.y == self.player.y + self.player.height) and \
-                    (self.player.x >= platform.x) and \
-                    (self.player.x <= platform.x + platform.width):
+            if (platform.y + platform.height / 2 >= self.player.y + self.player.height >= platform.y) and \
+                    (self.player.x + self.player.width >= platform.x >= self.player.x - self.player.width):
                 self.player.on_platform = True
+                # self.player.y = platform.y - platform.height
         print(self.player.on_platform)
 
     def check_for_end(self):
@@ -50,4 +49,4 @@ class Level:
             self.player.move()
             self.check_for_platform()
             self.camera.update()
-            sleep(0.03)
+            sleep(0.01667)
