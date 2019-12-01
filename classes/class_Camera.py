@@ -1,4 +1,4 @@
-"""This class will operate only with canvas coordinate system (x, y), point (0,0) on the left top side of the window
+"""This class will operate with canvas coordinate system (x, y), point (0,0) on the left top side of the window
 """
 
 

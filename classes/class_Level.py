@@ -46,7 +46,7 @@ class Level:
             self.player.move_right()
         if event.keycode == 37:
             self.player.move_left()
-        if event.keycode == 38:
+        if event.keycode == 38 and self.player.on_platform:
             self.player.jump()
 
     def key_release(self, event):
