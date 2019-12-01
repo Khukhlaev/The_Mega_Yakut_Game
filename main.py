@@ -18,6 +18,6 @@ parameters = load.load_level()
 
 level1 = Level(root, canvas, 1000, parameters[0], parameters[1], None)
 
-level1.game()
+level1.start_game()
 
 root.mainloop()

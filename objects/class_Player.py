@@ -22,7 +22,7 @@ class Player:
         self.vx = 0
         self.vy = 0
         self.on_platform = False
-        self.push_on_platform = False  # Push player clearly on platform if he will go into it
+        self.push_on_platform = False  # True if we need to push player clearly on platform if he will go into it
 
     def move(self):
         if not self.push_on_platform:
@@ -37,4 +37,5 @@ class Player:
         self.vx = 5
 
     def jump(self):
-        self.vy = -10
+        self.on_platform = False
+        self.vy = -5
