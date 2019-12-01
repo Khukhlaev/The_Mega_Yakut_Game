@@ -35,6 +35,16 @@ class Level:
                 break
         self.player.on_platform = on_platform
 
+    def collision_up(self):
+        for platform in self.platforms:
+            if (platform.y + 3 * platform.height / 2 > self.player.y + self.player.height + self.player.vy >
+                platform.y + platform.height / 2) and \
+                    ((platform.x + platform.width >= self.player.x + self.player.vx >= platform.x) or
+                     (
+                             platform.x + platform.width >= self.player.x + self.player.width + self.player.vx >=
+                             platform.x)):
+                self.player.vy = 0
+
     def check_for_end(self):
         if self.player.x >= self.length:
             print("The end!")
