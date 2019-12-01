@@ -19,19 +19,21 @@ class Level:
         self.end_level = False
 
     def check_for_platform(self):
-        self.player.on_platform = False
+        on_platform = False
         for platform in self.platforms:
             if (platform.y + platform.height / 2 >= self.player.y + self.player.height + self.player.vy >=
                 platform.y - platform.height / 2) \
                     and ((platform.x + platform.width >= self.player.x + self.player.vx >= platform.x) or
                          (
                                  platform.x + platform.width >= self.player.x + self.player.width + self.player.vx >=
-                                 platform.x)) and self.player.vy > 0:
+                                 platform.x)) and self.player.vy >= 0:
+
                 if self.player.vy != 0:
                     self.player.vy = platform.y - (self.player.y + self.player.height)
                     self.player.push_on_platform = True
-                self.player.on_platform = True
+                on_platform = True
                 break
+        self.player.on_platform = on_platform
 
     def check_for_end(self):
         if self.player.x >= self.length:
