@@ -26,7 +26,7 @@ class Level:
                     and ((platform.x + platform.width >= self.player.x + self.player.vx >= platform.x) or
                          (
                                  platform.x + platform.width >= self.player.x + self.player.width + self.player.vx >=
-                                 platform.x)):
+                                 platform.x)) and self.player.vy > 0:
                 if self.player.vy != 0:
                     self.player.vy = platform.y - (self.player.y + self.player.height)
                     self.player.push_on_platform = True
@@ -53,9 +53,11 @@ class Level:
         self.player.vx = 0
 
     def game(self):
+        self.check_for_platform()
+        self.player.move()
+        self.camera.update()
+        self.root.after(17, self.game)
+
+    def start_game(self):
         self.bind_all()
-        while not self.end_level:
-            self.check_for_platform()
-            self.player.move()
-            self.camera.update()
-            sleep(0.01667)
+        self.game()
