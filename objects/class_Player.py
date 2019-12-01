@@ -21,11 +21,12 @@ class Player:
         self.height = height
         self.vx = 0
         self.vy = 0
-        self.on_platform = True
-        self.push_up = False  # Push up player if he is into the platform
+        self.on_platform = False
+        self.push_on_platform = False  # Push player clearly on platform if he will go into it
 
     def move(self):
-        self.vy = gravity(self.vy, self.on_platform)
+        if not self.push_on_platform:
+            self.vy = gravity(self.vy, self.on_platform)
         self.x += self.vx
         self.y += self.vy
 

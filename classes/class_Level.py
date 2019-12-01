@@ -21,17 +21,21 @@ class Level:
     def check_for_platform(self):
         self.player.on_platform = False
         for platform in self.platforms:
-            if (platform.y + platform.height / 2 >= self.player.y + self.player.height >= platform.y) and \
-                    (self.player.x + self.player.width >= platform.x >= self.player.x - self.player.width):
-                '''if self.player.push_up:
-                    self.player.vy = -(self.player.y + self.player.height - platform.y)
-                    self.player.push_up = True
-                    print("death")'''
+            if (platform.y + platform.height / 2 >= self.player.y + self.player.height + self.player.vy >=
+                platform.y - platform.height / 2) \
+                    and ((platform.x + platform.width >= self.player.x + self.player.vx >= platform.x) or
+                         (
+                                 platform.x + platform.width >= self.player.x + self.player.width + self.player.vx >=
+                                 platform.x)):
+                if self.player.vy != 0:
+                    self.player.vy = platform.y - (self.player.y + self.player.height)
+                    self.player.push_on_platform = True
                 self.player.on_platform = True
-        #print(self.player.on_platform)
+                break
 
     def check_for_end(self):
-        pass
+        if self.player.x >= self.length:
+            print("The end!")
 
     def bind_all(self):
         self.root.bind("<KeyPress>", self.key_interpreter)
@@ -51,7 +55,7 @@ class Level:
     def game(self):
         self.bind_all()
         while not self.end_level:
-            self.player.move()
             self.check_for_platform()
+            self.player.move()
             self.camera.update()
             sleep(0.01667)

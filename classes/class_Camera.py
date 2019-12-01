@@ -37,14 +37,12 @@ class Camera:
         if self.player_on_center():
             for platform in self.platforms_id:
                 self.canvas.move(platform, - self.player.vx, 0)  # Move all platforms on the canvas to center player
-            self.canvas.move(self.player_id, 0, self.player.vy)
+            self.canvas.move(self.player_id, 0, self.player.vy)  # Move player on the canvas y coordinate
             self.level_x += self.player.vx
         else:
             self.canvas.move(self.player_id, self.player.vx, self.player.vy)
-        if self.player.push_up:
-            self.player.push_up = False
+        if self.player.push_on_platform:
+            self.player.push_on_platform = False
             self.player.vy = 0
-            print(self.player.push_up)
-            print(self.player.vy)
         self.canvas.update()
 
