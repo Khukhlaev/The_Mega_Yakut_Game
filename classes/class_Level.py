@@ -62,10 +62,12 @@ class Level:
             self.player.jump()
 
     def key_release(self, event):
-        self.player.vx = 0
+        if event.keycode == 39 or event.keycode == 37:
+            self.player.vx = 0
 
     def game(self):
         self.check_for_platform()
+        self.collision_up()
         self.player.move()
         self.camera.update()
         self.root.after(17, self.game)
