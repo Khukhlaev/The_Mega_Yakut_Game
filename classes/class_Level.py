@@ -21,7 +21,7 @@ class Level:
     def check_for_platform(self):
         on_platform = False
 
-        # push on platform TODO Formate
+        # push on platform TODO Formate spasite
         for platform in self.platforms:
             if (platform.y + platform.height / 2 >= self.player.y + self.player.height + self.player.vy >=
                 platform.y) \
