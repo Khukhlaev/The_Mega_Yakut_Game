@@ -20,9 +20,11 @@ class Level:
 
     def check_for_platform(self):
         on_platform = False
+
+        # push on platform
         for platform in self.platforms:
             if (platform.y + platform.height / 2 >= self.player.y + self.player.height + self.player.vy >=
-                platform.y - platform.height / 2) \
+                platform.y) \
                     and ((platform.x + platform.width >= self.player.x + self.player.vx >= platform.x) or
                          (
                                  platform.x + platform.width >= self.player.x + self.player.width + self.player.vx >=
@@ -31,8 +33,26 @@ class Level:
                 if self.player.vy != 0:
                     self.player.vy = platform.y - (self.player.y + self.player.height)
                     self.player.push_on_platform = True
+
                 on_platform = True
                 break
+
+        # push under platform
+        for platform in self.platforms:
+            if (platform.y + platform.height / 2 < self.player.y + self.player.vy <
+                platform.y + platform.height) \
+                    and ((platform.x + platform.width >= self.player.x + self.player.vx >= platform.x) or
+                         (
+                                 platform.x + platform.width >= self.player.x + self.player.width + self.player.vx >=
+                                 platform.x)) and self.player.vy <= 0:
+
+                if self.player.vy != 0:
+                    self.player.vy = self.player.y - platform.y
+                    self.player.push_under_platform = True
+
+                on_platform = True
+                break
+
         self.player.on_platform = on_platform
 
     def collision_up(self):
