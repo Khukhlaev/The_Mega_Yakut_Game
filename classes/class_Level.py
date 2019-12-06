@@ -40,6 +40,10 @@ class Level:
                                  platform.x)) and self.player.vy <= 0:
                 self.push_up(platform)
                 break
+            # check for platform on the left
+            if (platform.x + platform.width > self.player.x + self.player.vx > platform.x + platform.width / 2) and \
+                    (platform.y == self.player.y):
+                self.player.vx = platform.x + platform.width - self.player.x
         self.player.on_platform = on_platform
 
     def push_down(self, platform):
@@ -53,11 +57,6 @@ class Level:
         if self.player.vy != 0:
             self.player.vy = (platform.y + platform.height) - self.player.y
             self.player.push_under_platform = True
-
-    def collision_left(self):
-        for platform in self.platforms:
-            if platform.x + platform.width >= self.player.x + self.player.vx >= platform.x + platform.width / 2:
-                self.player.vx = 0
 
     def check_for_end(self):
         if self.player.x >= self.length:
