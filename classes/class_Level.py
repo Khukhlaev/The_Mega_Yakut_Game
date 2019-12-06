@@ -54,16 +54,6 @@ class Level:
             self.player.vy = (platform.y + platform.height) - self.player.y
             self.player.push_under_platform = True
 
-    def collision_up(self):
-        for platform in self.platforms:
-            if (platform.y + 3 * platform.height / 2 > self.player.y + self.player.height + self.player.vy >
-                platform.y + platform.height / 2) and \
-                    ((platform.x + platform.width >= self.player.x + self.player.vx >= platform.x) or
-                     (
-                             platform.x + platform.width >= self.player.x + self.player.width + self.player.vx >=
-                             platform.x)):
-                self.player.vy = 0
-
     def collision_left(self):
         for platform in self.platforms:
             if platform.x + platform.width >= self.player.x + self.player.vx >= platform.x + platform.width / 2:
@@ -91,7 +81,6 @@ class Level:
 
     def game(self):
         self.check_for_platform()
-        self.collision_up()
         self.player.move()
         self.camera.update()
         self.root.after(17, self.game)
