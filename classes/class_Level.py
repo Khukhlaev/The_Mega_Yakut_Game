@@ -20,40 +20,39 @@ class Level:
 
     def check_for_platform(self):
         on_platform = False
-
-        # push on platform TODO Formate
         for platform in self.platforms:
+            # check for platform below
             if (platform.y + platform.height / 2 >= self.player.y + self.player.height + self.player.vy >=
                 platform.y) \
                     and ((platform.x + platform.width >= self.player.x + self.player.vx >= platform.x) or
                          (
                                  platform.x + platform.width >= self.player.x + self.player.width + self.player.vx >=
                                  platform.x)) and self.player.vy >= 0:
-
-                if self.player.vy != 0:
-                    self.player.vy = platform.y - (self.player.y + self.player.height)
-                    self.player.push_on_platform = True
-
                 on_platform = True
+                self.push_down(platform)
                 break
-
-        # push under platform
-        for platform in self.platforms:
+            # check for platform ahead
             if (platform.y + platform.height / 2 < self.player.y + self.player.vy <
                 platform.y + platform.height) \
                     and ((platform.x + platform.width >= self.player.x + self.player.vx >= platform.x) or
                          (
                                  platform.x + platform.width >= self.player.x + self.player.width + self.player.vx >=
                                  platform.x)) and self.player.vy <= 0:
-
-                if self.player.vy != 0:
-                    self.player.vy = self.player.y - platform.y
-                    self.player.push_under_platform = True
-
-                on_platform = True
+                self.push_up(platform)
                 break
-
         self.player.on_platform = on_platform
+
+    def push_down(self, platform):
+        """This method is for preventing some bugs and push player straightly onto the platform"""
+        if self.player.vy != 0:
+            self.player.vy = platform.y - (self.player.y + self.player.height)
+            self.player.push_on_platform = True
+
+    def push_up(self, platform):
+        """This method is for preventing some bugs and push player down when he touch platform ahead"""
+        if self.player.vy != 0:
+            self.player.vy = (platform.y + platform.height) - self.player.y
+            self.player.push_under_platform = True
 
     def collision_up(self):
         for platform in self.platforms:
