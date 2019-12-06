@@ -21,7 +21,7 @@ class Level:
     def check_for_platform(self):
         on_platform = False
 
-        # push on platform
+        # push on platform TODO Formate
         for platform in self.platforms:
             if (platform.y + platform.height / 2 >= self.player.y + self.player.height + self.player.vy >=
                 platform.y) \
@@ -64,6 +64,11 @@ class Level:
                              platform.x + platform.width >= self.player.x + self.player.width + self.player.vx >=
                              platform.x)):
                 self.player.vy = 0
+
+    def collision_left(self):
+        for platform in self.platforms:
+            if platform.x + platform.width >= self.player.x + self.player.vx >= platform.x + platform.width / 2:
+                self.player.vx = 0
 
     def check_for_end(self):
         if self.player.x >= self.length:
