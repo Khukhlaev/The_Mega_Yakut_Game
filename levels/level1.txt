@@ -1,5 +1,7 @@
-30
-50
+30 - It is the platforms height
+50 - It is the platforms width
+30 - It is the player's hit box height
+50 - It is the player's hit box width
 
 [
 ----------------------------------|
@@ -13,7 +15,7 @@
 -----                            -|
 -                                -|
 -                                -|
--                                -|
+-           --                   -|
 -                      --        -|
 -                                -|
 ----------------------------------|

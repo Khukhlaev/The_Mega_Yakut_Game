@@ -14,7 +14,7 @@ canvas = tk.Canvas(root, bg='white')
 canvas.pack(fill=tk.BOTH, expand=1)
 canvas.update()
 
-parameters = load.load_level()
+parameters = load.load_level(1)  # Argument - number of the level
 
 level1 = Level(root, canvas, 1000, parameters[0], parameters[1], None)
 

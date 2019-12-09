@@ -29,7 +29,7 @@ class Level:
                                  platform.x + platform.width >= self.player.x + self.player.width + self.player.vx >=
                                  platform.x)) and self.player.vy >= 0:
                 on_platform = True
-                self.push_down(platform)
+                self.push_up(platform)
                 break
             # check for platform ahead
             if (platform.y + platform.height / 2 < self.player.y + self.player.vy <
@@ -38,21 +38,22 @@ class Level:
                          (
                                  platform.x + platform.width >= self.player.x + self.player.width + self.player.vx >=
                                  platform.x)) and self.player.vy <= 0:
-                self.push_up(platform)
+                self.push_down(platform)
                 break
             # check for platform on the left
             if (platform.x + platform.width > self.player.x + self.player.vx > platform.x + platform.width / 2) and \
                     (platform.y == self.player.y):
                 self.player.vx = platform.x + platform.width - self.player.x
+                break
         self.player.on_platform = on_platform
 
-    def push_down(self, platform):
+    def push_up(self, platform):
         """This method is for preventing some bugs and push player straightly onto the platform"""
         if self.player.vy != 0:
             self.player.vy = platform.y - (self.player.y + self.player.height)
             self.player.push_on_platform = True
 
-    def push_up(self, platform):
+    def push_down(self, platform):
         """This method is for preventing some bugs and push player down when he touch platform ahead"""
         if self.player.vy != 0:
             self.player.vy = (platform.y + platform.height) - self.player.y

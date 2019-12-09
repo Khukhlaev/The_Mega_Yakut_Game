@@ -53,4 +53,7 @@ class Camera:
         if self.player.push_on_platform:
             self.player.push_on_platform = False
             self.player.vy = 0
+        if self.player.push_under_platform:
+            self.player.push_under_platform = False
+            self.player.vy = 0
         self.canvas.update()
