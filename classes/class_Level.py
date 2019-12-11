@@ -3,7 +3,6 @@
 """
 
 from classes.class_Camera import Camera
-from time import sleep
 
 
 class Level:
@@ -82,15 +81,15 @@ class Level:
             self.player.vx = 0
 
     def game(self):
+        """Main method of each level game, is called every 16 ms"""
         self.check_for_platform()
         self.player.move()
         self.camera.update()
         if not self.check_for_end():
             self.root.after(16, self.game)
         else:
-            self.end_level = True
             self.camera.end_level()
-            sleep(5)
+            self.end_level = True
 
     def start_game(self):
         self.bind_all()

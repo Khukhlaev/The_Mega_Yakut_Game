@@ -41,10 +41,10 @@ class Camera:
 
     def end_level(self):
         self.canvas.create_text(self.canvas.winfo_width() - 400, 200,
-                                text="Thank you Yakut.",
+                                text="Thank you Yakut!",
                                 font="Arial 20", fill="red")
-        self.canvas.create_text(self.canvas.winfo_width() - 400, 300,
-                                text="But your president is in another city! ",
+        self.canvas.create_text(self.canvas.winfo_width() - 400, 250,
+                                text="But your president is in the another city! ",
                                 font="Arial 20", fill="red")
 
     def update(self):
