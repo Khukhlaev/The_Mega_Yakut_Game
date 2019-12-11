@@ -8,6 +8,8 @@ def load_level(level_number):
     platform_width = int(level_file.readline().split()[0])
     player_height = int(level_file.readline().split()[0])
     player_width = int(level_file.readline().split()[0])
+    level_length = platform_width * int(level_file.readline().split()[0])
+    print(level_length)
     platforms = []
     player = ""
     y = 0
@@ -21,4 +23,4 @@ def load_level(level_number):
         else:
             y -= 1
         y += 1
-    return [player, platforms]
+    return [level_length, player, platforms]

@@ -39,6 +39,14 @@ class Camera:
             return False
         return True
 
+    def end_level(self):
+        self.canvas.create_text(self.canvas.winfo_width() - 400, 200,
+                                text="Thank you Yakut.",
+                                font="Arial 20", fill="red")
+        self.canvas.create_text(self.canvas.winfo_width() - 400, 300,
+                                text="But your president is in another city! ",
+                                font="Arial 20", fill="red")
+
     def update(self):
         coordinates = self.canvas.coords(self.player_hit_box)
         if self.player_on_center():

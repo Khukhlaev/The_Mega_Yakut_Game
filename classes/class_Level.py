@@ -1,9 +1,9 @@
 """This class will operate with coordinate system (x, y), point (0,0) on the left top side of the level
 
 """
-from time import sleep
 
 from classes.class_Camera import Camera
+from time import sleep
 
 
 class Level:
@@ -60,8 +60,10 @@ class Level:
             self.player.push_under_platform = True
 
     def check_for_end(self):
-        if self.player.x >= self.length:
-            print("The end!")
+        """This method is for check if player end the level"""
+        if self.player.x + self.player.width >= self.length:
+            return True
+        return False
 
     def bind_all(self):
         self.root.bind("<KeyPress>", self.key_interpreter)
@@ -83,7 +85,12 @@ class Level:
         self.check_for_platform()
         self.player.move()
         self.camera.update()
-        self.root.after(17, self.game)
+        if not self.check_for_end():
+            self.root.after(16, self.game)
+        else:
+            self.end_level = True
+            self.camera.end_level()
+            sleep(5)
 
     def start_game(self):
         self.bind_all()

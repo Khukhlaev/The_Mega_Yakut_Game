@@ -1,10 +1,6 @@
-# importing necessary modules
-
-
-# class body
 class Platform:
 
-    def __init__(self, x, y,  width, height):
+    def __init__(self, x, y, width, height):
         """
         Platform class constructor
         Args:
@@ -15,4 +11,3 @@ class Platform:
         self.y = y
         self.width = width
         self.height = height
-
