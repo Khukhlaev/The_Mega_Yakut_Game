@@ -20,12 +20,11 @@ class Camera:
                                              platform.x + platform.width,
                                              platform.y + platform.height, fill="Green")
             )
-        img = Image.open("graphics/sprites/player_static_right.png")
         self.player_hit_box = self.canvas.create_rectangle(self.player.x, self.player.y,
                                                            self.player.x + self.player.width,
                                                            self.player.y + self.player.height, outline="white",
                                                            fill="white")
-        render = ImageTk.PhotoImage(img)
+        render = ImageTk.PhotoImage(self.player.sprite)
         self.player_id = canvas.create_image(self.player.x, self.player.y, image=render)
         self.show_sprite = render
         self.enemies = enemies
@@ -48,7 +47,13 @@ class Camera:
                                 font="Arial 20", fill="red")
 
     def update(self):
+        canvas = self.canvas
         coordinates = self.canvas.coords(self.player_hit_box)
+        self.player.set_sprite()
+        canvas.delete(self.player_id)
+        render = ImageTk.PhotoImage(self.player.sprite)
+        self.player_id = canvas.create_image(self.player.x, self.player.y, image=render)
+        self.show_sprite = render
         if self.player_on_center():
             for platform in self.platforms_id:
                 self.canvas.move(platform, - self.player.vx, 0)  # Move all platforms on the canvas to center player
