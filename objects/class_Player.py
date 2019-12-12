@@ -6,7 +6,6 @@ from PIL import Image, ImageTk
 from physics.physics import gravity
 
 
-
 # class body
 class Player:
     def __init__(self, x, y, width, height):
@@ -46,6 +45,7 @@ class Player:
         self.vy = -5
 
     def set_sprite(self):
+        """This method changes the player's animation depending on the direction of movement """
         if self.vx == 0 or self.delay == 5:
             self.delay = 0
         if self.vx != 0:
