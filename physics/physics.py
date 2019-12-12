@@ -1,4 +1,4 @@
-g = 0.1667  # gravity acceleration per frame
+g = 0.5  # gravity acceleration per frame
 
 
 def gravity(vy, on_platform):
