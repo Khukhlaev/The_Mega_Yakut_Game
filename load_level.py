@@ -3,6 +3,10 @@ from objects.class_Platform import Platform
 
 
 def load_level(level_number):
+    """
+    Create a level structure using the txt layout
+    Args: level number
+    """
     level_file = open('levels/level' + str(level_number) + '.txt', 'r')
     platform_height = int(level_file.readline().split()[0])
     platform_width = int(level_file.readline().split()[0])
