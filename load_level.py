@@ -1,5 +1,6 @@
 from objects.class_Player import Player
 from objects.class_Platform import Platform
+from objects.class_Policeman import Policeman
 
 
 def load_level(level_number):
@@ -8,12 +9,16 @@ def load_level(level_number):
     Args: level number
     """
     level_file = open('levels/level' + str(level_number) + '.txt', 'r')
+    level_length = int(level_file.readline().split()[0])
     platform_height = int(level_file.readline().split()[0])
     platform_width = int(level_file.readline().split()[0])
     player_height = int(level_file.readline().split()[0])
     player_width = int(level_file.readline().split()[0])
-    level_length = platform_width * int(level_file.readline().split()[0])
+    enemy_height = int(level_file.readline().split()[0])
+    enemy_width = int(level_file.readline().split()[0])
+    level_length *= platform_width
     platforms = []
+    enemies = []
     player = ""
     y = 0
     for line in level_file:
@@ -21,9 +26,11 @@ def load_level(level_number):
             for x in range(len(line)):
                 if line[x] == '-':
                     platforms.append(Platform(x * platform_width, y * platform_height, platform_width, platform_height))
-                if line[x] == 'P':
+                elif line[x] == 'P':
                     player = Player(x * platform_width, y * player_height, player_width, player_height)
+                elif line[x] == 'e':
+                    enemies.append(Policeman(x * platform_width, y * player_height, enemy_width, enemy_height))
         else:
             y -= 1
         y += 1
-    return [level_length, player, platforms]
+    return [level_length, player, platforms, enemies]

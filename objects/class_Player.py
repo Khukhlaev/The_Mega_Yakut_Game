@@ -2,7 +2,7 @@
 
 """
 
-from PIL import Image, ImageTk
+from PIL import Image
 from physics.physics import gravity
 
 
@@ -22,7 +22,7 @@ class Player:
         self.height = height
         self.vx = 0
         self.vy = 0
-        self.sprite = Image.open("graphics/sprites/player_static_right.png")
+        self.sprite = Image.open("graphics/sprites/player_sprites/player_static_right.png")
         self.delay = 0
         self.on_platform = False
         self.push_on_platform = False  # True if we need to push player clearly on platform if he will go into it
@@ -51,12 +51,12 @@ class Player:
         if self.vx != 0:
             if self.vx > 0:
                 if self.delay <= 2.5:
-                    self.sprite = Image.open("graphics/sprites/player_static_right.png")
+                    self.sprite = Image.open("graphics/sprites/player_sprites/player_static_right.png")
                 else:
-                    self.sprite = Image.open("graphics/sprites/player_running_right_1.png")
+                    self.sprite = Image.open("graphics/sprites/player_sprites/player_running_right_1.png")
             else:
                 if self.delay <= 2.5:
-                    self.sprite = Image.open("graphics/sprites/player_static_left.png")
+                    self.sprite = Image.open("graphics/sprites/player_sprites/player_static_left.png")
                 else:
-                    self.sprite = Image.open("graphics/sprites/player_running_left_1.png")
+                    self.sprite = Image.open("graphics/sprites/player_sprites/player_running_left_1.png")
             self.delay += 0.5

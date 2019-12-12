@@ -1,7 +1,7 @@
 """This class will operate with canvas coordinate system (x, y), point (0,0) on the left top side of the window
 """
 
-from PIL import Image, ImageTk
+from PIL import ImageTk
 
 
 class Camera:
@@ -28,7 +28,20 @@ class Camera:
         self.player_id = canvas.create_image(self.player.x + self.player.width / 2, self.player.y, image=render)
         self.show_sprite = render
         self.enemies = enemies
-        self.level_x = 0
+        self.enemy_hit_boxes = []
+        for enemy in enemies:
+            self.enemy_hit_boxes.append(
+                self.canvas.create_rectangle(enemy.x, enemy.y,
+                                             enemy.x + enemy.width,
+                                             enemy.y + enemy.height, fill="Red")
+            )
+        self.enemies_id = []
+        self.enemy_sprites = []
+        for enemy in enemies:
+            render = ImageTk.PhotoImage(enemy.sprite)
+            self.enemy_sprites.append(render)
+            self.enemies_id.append(
+                canvas.create_image(enemy.x + enemy.width / 2, enemy.y, image=render))
 
     def player_on_center(self):
         """Return False if we need to center model of the player
@@ -57,9 +70,10 @@ class Camera:
         if self.player_on_center():
             for platform in self.platforms_id:
                 self.canvas.move(platform, - self.player.vx, 0)  # Move all platforms on the canvas to center player
+            for enemy in self.enemy_hit_boxes:
+                self.canvas.move(enemy, -self.player.vx, 0)  # Move all enemy hit boxes on the canvas to center player
             self.canvas.move(self.player_hit_box, 0, self.player.vy)  # Move player on the canvas y coordinate
             self.canvas.move(self.player_id, 0, self.player.vy)  # Move player on the canvas y coordinate
-            self.level_x += self.player.vx
         else:
             self.canvas.move(self.player_hit_box, self.player.vx, self.player.vy)
             self.canvas.move(self.player_id, self.player.vx, self.player.vy)

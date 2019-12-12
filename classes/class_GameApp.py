@@ -18,7 +18,7 @@ class GameApp:
         """This method will start new level"""
         self.canvas.delete(ALL)
         parameters = load.load_level(self.number_of_current_level)  # Argument - number of the level
-        self.current_level = Level(self.root, self.canvas, parameters[0], parameters[1], parameters[2], None)
+        self.current_level = Level(self.root, self.canvas, parameters[0], parameters[1], parameters[2], parameters[3])
         self.current_level.start_game()
         self.check_level_for_end()
 
