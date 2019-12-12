@@ -25,7 +25,7 @@ class Camera:
                                                            self.player.y + self.player.height, outline="white",
                                                            fill="white")
         render = ImageTk.PhotoImage(self.player.sprite)
-        self.player_id = canvas.create_image(self.player.x, self.player.y, image=render)
+        self.player_id = canvas.create_image(self.player.x + self.player.width / 2, self.player.y, image=render)
         self.show_sprite = render
         self.enemies = enemies
         self.level_x = 0

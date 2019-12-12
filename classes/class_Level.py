@@ -41,8 +41,17 @@ class Level:
                 break
             # check for platform on the left
             if (platform.x + platform.width > self.player.x + self.player.vx > platform.x + platform.width / 2) and \
-                    (platform.y == self.player.y):
-                self.player.vx = platform.x + platform.width - self.player.x
+                    (
+                            platform.y + platform.height > self.player.y > platform.y or
+                            platform.y + platform.height > self.player.y + self.player.height > platform.y):
+                self.player.vx = (platform.x + platform.width) - self.player.x
+                break
+            # check for platform on the right
+            if (platform.x + platform.width / 2 > self.player.x + self.player.width + self.player.vx > platform.x) and \
+                    (
+                            platform.y + platform.height > self.player.y > platform.y or
+                            platform.y + platform.height > self.player.y + self.player.height > platform.y):
+                self.player.vx = (self.player.x + self.player.width) - platform.x
                 break
         self.player.on_platform = on_platform
 
