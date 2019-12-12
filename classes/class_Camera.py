@@ -48,11 +48,11 @@ class Camera:
 
     def update(self):
         canvas = self.canvas
-        coordinates = self.canvas.coords(self.player_hit_box)
+        coordinates = self.canvas.coords(self.player_id)
         self.player.set_sprite()
         canvas.delete(self.player_id)
         render = ImageTk.PhotoImage(self.player.sprite)
-        self.player_id = canvas.create_image(self.player.x, self.player.y, image=render)
+        self.player_id = canvas.create_image(coordinates[0], coordinates[1], image=render)
         self.show_sprite = render
         if self.player_on_center():
             for platform in self.platforms_id:

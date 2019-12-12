@@ -6,8 +6,6 @@ from PIL import Image, ImageTk
 from physics.physics import gravity
 
 
-delay = 0
-
 
 # class body
 class Player:
@@ -26,6 +24,7 @@ class Player:
         self.vx = 0
         self.vy = 0
         self.sprite = Image.open("graphics/sprites/player_static_right.png")
+        self.delay = 0
         self.on_platform = False
         self.push_on_platform = False  # True if we need to push player clearly on platform if he will go into it
         self.push_under_platform = False
@@ -47,18 +46,17 @@ class Player:
         self.vy = -5
 
     def set_sprite(self):
-        global delay
-        if self.vx == 0 or delay == 5:
-            delay = 0
+        if self.vx == 0 or self.delay == 5:
+            self.delay = 0
         if self.vx != 0:
             if self.vx > 0:
-                if delay <= 2.5:
+                if self.delay <= 2.5:
                     self.sprite = Image.open("graphics/sprites/player_static_right.png")
                 else:
                     self.sprite = Image.open("graphics/sprites/player_running_right_1.png")
             else:
-                if delay <= 2.5:
+                if self.delay <= 2.5:
                     self.sprite = Image.open("graphics/sprites/player_static_left.png")
                 else:
                     self.sprite = Image.open("graphics/sprites/player_running_left_1.png")
-            delay += 0.5
+            self.delay += 0.5

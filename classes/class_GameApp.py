@@ -29,8 +29,8 @@ class GameApp:
         self.root.after(10000, self.new_level_game)
 
     def check_level_for_end(self):
-        """This method will check level for end, is called every 16 ms"""
-        if not self.current_level:
-            self.root.after(16, self.check_level_for_end)
+        """This method will check level for end, is called every 60 ms"""
+        if not self.current_level.end_level:
+            self.root.after(60, self.check_level_for_end)
         else:
             self.new_level()
