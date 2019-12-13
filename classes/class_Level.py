@@ -3,7 +3,7 @@
 """
 
 from classes.class_Camera import Camera
-
+from time import sleep
 
 class Level:
 
@@ -64,13 +64,14 @@ class Level:
                     break
         object.on_platform = on_platform
 
-    def check_for_death(self):
-        if self.player.y >= 650:
-            self.player.live = False
+    def check_for_live(self):
+        if self.player.y >= 800:
+            return False
         for enemy in self.enemies:
-            if enemy[0].x + enemy[0].width / 2 < self.player[0].x < enemy[0].x + enemy[0].width and \
-                    enemy[0].y + enemy[0].height / 2 < self.player[0].y < enemy[0].y + enemy[0].height:
-                self.player.live = False
+            if enemy.x + enemy.width / 2 < self.player.x < enemy.x + enemy.width and \
+                    enemy.y + enemy.height / 2 < self.player.y < enemy.y + enemy.height:
+                return False
+        return True
 
     def check_for_end(self):
         """This method is for check if player end the level"""
@@ -78,33 +79,15 @@ class Level:
             return True
         return False
 
-    def bind_all(self):
-        self.root.bind("<KeyPress>", self.key_interpreter)
-        self.root.bind("<KeyRelease>", self.key_release)
-
-    def key_interpreter(self, event):
-        if event.keycode == 39:
-            self.player.move_right()
-        if event.keycode == 37:
-            self.player.move_left()
-        if event.keycode == 38 and self.player.on_platform:
-            self.player.jump()
-
-    def key_release(self, event):
-        if event.keycode == 39 or event.keycode == 37:
-            self.player.vx = 0
-
     def game(self):
         """Main method of each level game, is called every 16 ms"""
         self.check_for_platform(self.player)
         self.player.move()
+        self.camera.update()
         for enemy in self.enemies:
             self.check_for_platform(enemy, False)
             enemy.move()
-        self.camera.update()
-        if not self.check_for_end():
-            self.root.after(16, self.game)
-        else:
+        if self.check_for_end():
             self.camera.end_level()
             self.end_level = True
 

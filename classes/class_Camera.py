@@ -78,8 +78,8 @@ class Camera:
         else:
             self.canvas.move(self.player_hit_box, self.player.vx, self.player.vy)
             self.canvas.move(self.player_id, self.player.vx, self.player.vy)
-            for enemy in self.enemies:
-                self.canvas.move(enemy[1], enemy[0].vx, enemy[0].vy)  # Move enemies for their own logic
+        for enemy in self.enemies:
+            self.canvas.move(enemy[1], enemy[0].vx, enemy[0].vy)  # Move enemies for their own logic
         if self.player.push_on_platform:
             self.player.push_on_platform = False
             self.player.vy = 0
