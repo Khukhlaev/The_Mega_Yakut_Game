@@ -96,7 +96,4 @@ class Camera:
             if enemy[0].push_under_platform:
                 enemy[0].push_under_platform = False
                 enemy[0].vy = 0
-            if enemy[0].push_x:
-                enemy[0].push_x = False
-                enemy[0].vx = 0
         self.canvas.update()

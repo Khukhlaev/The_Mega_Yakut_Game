@@ -17,12 +17,12 @@ class Level:
         self.enemies = enemies
         self.end_level = False
 
-    def check_for_platform(self, object):
+    def check_for_platform(self, object, check_x=True):
         on_platform = False
         for platform in self.platforms:
             end_loop = False
             # check for platform on the left
-            if (platform.x + platform.width > object.x + object.vx > platform.x + platform.width / 2) and \
+            if check_x and (platform.x + platform.width > object.x + object.vx > platform.x + platform.width / 2) and \
                     (
                             platform.y + platform.height > object.y > platform.y or
                             platform.y + platform.height > object.y + object.height > platform.y):
@@ -30,7 +30,7 @@ class Level:
                 object.push_x = True
                 object.vx = (platform.x + platform.width) - object.x
             # check for platform on the right
-            if (platform.x + platform.width / 2 > object.x + object.width + object.vx > platform.x) and \
+            if check_x and (platform.x + platform.width / 2 > object.x + object.width + object.vx > platform.x) and \
                     (
                             platform.y + platform.height > object.y > platform.y or
                             platform.y + platform.height > object.y + object.height > platform.y):
@@ -99,7 +99,7 @@ class Level:
         self.check_for_platform(self.player)
         self.player.move()
         for enemy in self.enemies:
-            self.check_for_platform(enemy)
+            self.check_for_platform(enemy, False)
             enemy.move()
         self.camera.update()
         if not self.check_for_end():
