@@ -34,3 +34,11 @@ class GameApp:
             self.root.after(100, self.check_level_for_end)
         else:
             self.new_level()
+
+    def check_for_death(self):
+        """This method checks if player is alive"""
+        if not self.current_level.player.live:
+            self.new_level_game()
+        else:
+            self.root.after(100, self.check_for_death)
+
