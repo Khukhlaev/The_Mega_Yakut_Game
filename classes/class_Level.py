@@ -64,6 +64,14 @@ class Level:
                     break
         object.on_platform = on_platform
 
+    def check_for_death(self):
+        if self.player.y >= 650:
+            self.player.live = False
+        for enemy in self.enemies:
+            if enemy[0].x + enemy[0].width / 2 < self.player[0].x < enemy[0].x + enemy[0].width and \
+                    enemy[0].y + enemy[0].height / 2 < self.player[0].y < enemy[0].y + enemy[0].height:
+                self.player.live = False
+
     def check_for_end(self):
         """This method is for check if player end the level"""
         if self.player.x + self.player.width >= self.length:
