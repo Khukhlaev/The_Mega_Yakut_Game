@@ -27,9 +27,9 @@ def load_level(level_number):
                 if line[x] == '-':
                     platforms.append(Platform(x * platform_width, y * platform_height, platform_width, platform_height))
                 elif line[x] == 'P':
-                    player = Player(x * platform_width, y * player_height, player_width, player_height)
+                    player = Player(x * platform_width, y * platform_height, player_width, player_height)
                 elif line[x] == 'e':
-                    enemies.append(Policeman(x * platform_width, y * player_height, enemy_width, enemy_height))
+                    enemies.append(Policeman(x * platform_width, y * platform_height, enemy_width, enemy_height))
         else:
             y -= 1
         y += 1

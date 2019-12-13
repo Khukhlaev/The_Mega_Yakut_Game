@@ -28,21 +28,20 @@ class Camera:
         render = ImageTk.PhotoImage(self.player.sprite)
         self.player_id = canvas.create_image(self.player.x + self.player.width / 2, self.player.y + 2, image=render)
         self.show_sprite = render
-        self.enemies = enemies
-        self.enemy_hit_boxes = []
+        self.enemies = []
         for enemy in enemies:
-            self.enemy_hit_boxes.append(
-                self.canvas.create_rectangle(enemy.x, enemy.y,
-                                             enemy.x + enemy.width,
-                                             enemy.y + enemy.height, fill="Red")
-            )
+            self.enemies.append([enemy,
+                                self.canvas.create_rectangle(enemy.x, enemy.y,
+                                                             enemy.x + enemy.width,
+                                                             enemy.y + enemy.height, fill="Red")]
+                                )
         self.enemies_id = []
-        self.enemy_sprites = []
-        for enemy in enemies:
-            render = ImageTk.PhotoImage(enemy.sprite)
-            self.enemy_sprites.append(render)
-            self.enemies_id.append(
-                canvas.create_image(enemy.x + enemy.width / 2, enemy.y, image=render))
+        # self.enemy_sprites = []
+        # for enemy in enemies:
+        #     render = ImageTk.PhotoImage(enemy.sprite)
+        #     self.enemy_sprites.append(render)
+        #     self.enemies_id.append(
+        #         canvas.create_image(enemy.x + enemy.width / 2, enemy.y, image=render))
 
     def player_on_center(self):
         """Return False if we need to center model of the player
@@ -72,13 +71,15 @@ class Camera:
         if self.player_on_center():
             for platform in self.platforms_id:
                 self.canvas.move(platform, - self.player.vx, 0)  # Move all platforms on the canvas to center player
-            for enemy in self.enemy_hit_boxes:
-                self.canvas.move(enemy, -self.player.vx, 0)  # Move all enemy hit boxes on the canvas to center player
+            for enemy in self.enemies:
+                self.canvas.move(enemy[1], - self.player.vx, 0)  # Move enemies hit boxes on the canvas to center player
             self.canvas.move(self.player_hit_box, 0, self.player.vy)  # Move player on the canvas y coordinate
             self.canvas.move(self.player_id, 0, self.player.vy)  # Move player on the canvas y coordinate
         else:
             self.canvas.move(self.player_hit_box, self.player.vx, self.player.vy)
             self.canvas.move(self.player_id, self.player.vx, self.player.vy)
+            for enemy in self.enemies:
+                self.canvas.move(enemy[1], enemy[0].vx, enemy[0].vy)  # Move enemies for their own logic
         if self.player.push_on_platform:
             self.player.push_on_platform = False
             self.player.vy = 0
@@ -88,4 +89,14 @@ class Camera:
         if self.player.push_x:
             self.player.push_x = False
             self.player.vx = 0
+        for enemy in self.enemies:
+            if enemy[0].push_on_platform:
+                enemy[0].push_on_platform = False
+                enemy[0].vy = 0
+            if enemy[0].push_under_platform:
+                enemy[0].push_under_platform = False
+                enemy[0].vy = 0
+            if enemy[0].push_x:
+                enemy[0].push_x = False
+                enemy[0].vx = 0
         self.canvas.update()

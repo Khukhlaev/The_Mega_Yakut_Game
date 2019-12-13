@@ -1,19 +1,20 @@
 """This class is responsible for the bot actions"""
+from classes.class_Organism import Organism
+from physics.physics import gravity
 
-class Dumb:
+
+class Dumb(Organism):
 
     def __init__(self, x, y, width, height):
-        self.x = x  # It is coordinates in natural coordinate system (not canvas coordinate system)
-        self.y = y
-        self.x_abstract = x
-        self.y_abstract = y
-        self.width = width
-        self.height = height
-        self.vx = 0
-        self.vy = 0
+        super().__init__(x, y, width, height)
         self.on_platform = False
-        self.platform_beside = False
-
+        self.push_on_platform = False  # True if we need to push player clearly on platform if he will go into it
+        self.push_under_platform = False
+        self.push_x = False
 
     def move(self):
-        if self.on_platform and self.x + self.vx: pass
+        if not self.on_platform:
+            self.vx = - self.vx
+        self.vy = gravity(self.vy, self.on_platform)
+        self.x += self.vx
+        self.y += self.vy

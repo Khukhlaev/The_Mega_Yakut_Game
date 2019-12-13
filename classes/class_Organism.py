@@ -12,7 +12,3 @@ class Organism:
         self.sprite = ""
         self.vx = choice([3, -3])
         self.vy = 0
-
-    def move(self):
-        self.x += self.vx
-        self.y += self.vy

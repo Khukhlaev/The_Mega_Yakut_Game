@@ -46,7 +46,9 @@ class Level:
                                  platform.x)) and object.vy >= 0:
                 end_loop = True
                 on_platform = True
-                self.push_up(platform)
+                if object.vy != 0:
+                    object.vy = platform.y - (object.y + object.height)
+                    object.push_on_platform = True
             # check for platform ahead
             if not end_loop and (platform.y + platform.height / 2 < object.y + object.vy <
                                  platform.y + platform.height) \
@@ -55,22 +57,12 @@ class Level:
                                  platform.x + platform.width >= object.x + object.width + object.vx >=
                                  platform.x)) and object.vy <= 0:
                 end_loop = True
-                self.push_down(platform)
+                if object.vy != 0:
+                    object.vy = (platform.y + platform.height) - object.y
+                    object.push_under_platform = True
                 if end_loop:
                     break
         object.on_platform = on_platform
-
-    def push_up(self, platform):
-        """This method is for preventing some bugs and push player straightly onto the platform"""
-        if self.player.vy != 0:
-            self.player.vy = platform.y - (self.player.y + self.player.height)
-            self.player.push_on_platform = True
-
-    def push_down(self, platform):
-        """This method is for preventing some bugs and push player down when he touch platform ahead"""
-        if self.player.vy != 0:
-            self.player.vy = (platform.y + platform.height) - self.player.y
-            self.player.push_under_platform = True
 
     def check_for_end(self):
         """This method is for check if player end the level"""
@@ -98,6 +90,9 @@ class Level:
         """Main method of each level game, is called every 16 ms"""
         self.check_for_platform(self.player)
         self.player.move()
+        for enemy in self.enemies:
+            self.check_for_platform(enemy)
+            enemy.move()
         self.camera.update()
         if not self.check_for_end():
             self.root.after(16, self.game)
