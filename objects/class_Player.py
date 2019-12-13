@@ -28,6 +28,7 @@ class Player:
         self.on_platform = False
         self.push_on_platform = False  # True if we need to push player clearly on platform if he will go into it
         self.push_under_platform = False
+        self.push_x = False
 
     def move(self):
         if not self.push_on_platform:

@@ -18,14 +18,15 @@ class Camera:
             self.platforms_id.append(
                 self.canvas.create_rectangle(platform.x, platform.y,
                                              platform.x + platform.width,
-                                             platform.y + platform.height, fill="Green")
+                                             platform.y + platform.height, outline="white",
+                                             fill="Green")
             )
         self.player_hit_box = self.canvas.create_rectangle(self.player.x, self.player.y,
                                                            self.player.x + self.player.width,
                                                            self.player.y + self.player.height, outline="white",
                                                            fill="white")
         render = ImageTk.PhotoImage(self.player.sprite)
-        self.player_id = canvas.create_image(self.player.x + self.player.width / 2, self.player.y, image=render)
+        self.player_id = canvas.create_image(self.player.x + self.player.width / 2, self.player.y + 2, image=render)
         self.show_sprite = render
         self.enemies = enemies
         self.enemy_hit_boxes = []
@@ -83,4 +84,7 @@ class Camera:
         if self.player.push_under_platform:
             self.player.push_under_platform = False
             self.player.vy = 0
+        if self.player.push_x:
+            self.player.push_x = False
+            self.player.vx = 0
         self.canvas.update()
