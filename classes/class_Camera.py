@@ -61,6 +61,7 @@ class Camera:
                                 font="Arial 20", fill="red")
 
     def update(self):
+        """This method is responsible for opening a new part of the world when player reaches middle of the window"""
         canvas = self.canvas
         coordinates = self.canvas.coords(self.player_id)
         self.player.set_sprite()

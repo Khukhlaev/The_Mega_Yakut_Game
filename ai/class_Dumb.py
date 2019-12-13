@@ -1,3 +1,5 @@
+"""This class is responsible for the bot actions"""
+
 class Dumb:
 
     def __init__(self, x, y, width, height):
