@@ -3,12 +3,11 @@
 """
 
 from classes.class_Camera import Camera
-from time import sleep
+
 
 class Level:
 
-    def __init__(self, root, canvas, length, player, platforms, enemies):
-        self.root = root
+    def __init__(self, canvas, length, player, platforms, enemies):
         self.canvas = canvas
         self.length = length  # Length of the level in coordinates units
         self.camera = Camera(canvas, player, platforms, enemies)
@@ -68,8 +67,9 @@ class Level:
         if self.player.y >= 800:
             return False
         for enemy in self.enemies:
-            if enemy.x + enemy.width / 2 < self.player.x < enemy.x + enemy.width and \
-                    enemy.y + enemy.height / 2 < self.player.y < enemy.y + enemy.height:
+            if (enemy.x <= self.player.x + self.player.width <= enemy.x + enemy.width or
+                enemy.x <= self.player.x <= enemy.x + enemy.width) and \
+                    enemy.y + enemy.height / 2 < self.player.y + self.player.height <= enemy.y + enemy.height:
                 return False
         return True
 
@@ -90,7 +90,3 @@ class Level:
         if self.check_for_end():
             self.camera.end_level()
             self.end_level = True
-
-    def start_game(self):
-        self.bind_all()
-        self.game()
