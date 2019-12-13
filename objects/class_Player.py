@@ -4,24 +4,20 @@
 
 from PIL import Image
 from physics.physics import gravity
+from classes.class_Organism import Organism
 
 
 # class body
-class Player:
+class Player(Organism):
     def __init__(self, x, y, width, height):
+        super().__init__(x, y, width, height)
         """
         PLayer class constructor
         Args:
             (x, y) - coordinates of the top left point of the rectangle in which the model is enclosed
             height, width - height and width of this rectangle
         """
-        self.live = True
-        self.x = x  # It is coordinates in natural coordinate system (not canvas coordinate system)
-        self.y = y
-        self.width = width
-        self.height = height
         self.vx = 0
-        self.vy = 0
         self.sprite = Image.open("graphics/sprites/player_sprites/player_static_right.png")
         self.direction = "right"
         self.delay = 0
