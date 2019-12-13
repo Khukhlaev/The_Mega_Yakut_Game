@@ -14,8 +14,18 @@ canvas = tk.Canvas(root, bg='white')
 canvas.pack(fill=tk.BOTH, expand=1)
 canvas.update()
 
-
 app = GameApp(NUMBER_OF_LEVELS, root, canvas)
-app.new_level_game()
+
+
+def new_game():
+    button_new_game.destroy()
+    button_exit.destroy()
+    app.new_level_game()
+
+
+button_new_game = tk.Button(root, text="New game", width=15, height=3, command=new_game)
+button_new_game.pack()
+button_exit = tk.Button(root, text="Exit", width=15, height=3, command='')
+button_exit.pack()
 
 root.mainloop()
