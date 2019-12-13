@@ -12,6 +12,7 @@ class Dumb(Organism):
         self.push_under_platform = False
 
     def move(self):
+        """Bot movement along the platform with a turn at the edges"""
         if not self.on_platform:
             self.vx = - self.vx
         print(self.vx, self.on_platform)
