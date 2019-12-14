@@ -72,7 +72,7 @@ class Level:
                     self.player.live = False
                     self.player.on_platform = False
                     self.player.vy = -5
-                    if self.player.direction == "Right":
+                    if self.player.direction == "right":
                         self.player.vx = -5
                     else:
                         self.player.vx = 5

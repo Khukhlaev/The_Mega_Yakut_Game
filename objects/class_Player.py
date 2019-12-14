@@ -96,7 +96,7 @@ class Player(Organism):
 
         # 5) This makes the player falling after death
         else:
-            if self.direction == "Right":
+            if self.direction == "right":
                 self.sprite = Image.open("graphics/sprites/player_sprites/player_running_right_2.png")
             else:
                 self.sprite = Image.open("graphics/sprites/player_sprites/player_running_left_2.png")
