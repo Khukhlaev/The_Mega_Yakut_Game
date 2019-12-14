@@ -52,48 +52,50 @@ class Player(Organism):
     def set_sprite(self):
         """This method changes the player's animation depending on the direction of movement """
 
-        # 1) This makes the 3-part linear running animation (4) cycled
-        if self.vx == 0 or self.delay >= 3:
-            self.delay = 0
+        if self.live:
 
-        # 2) This makes the player static after run stopping
-        if self.on_platform and self.vx == 0:
-            if self.direction == "right":
-                self.sprite = Image.open("graphics/sprites/player_sprites/player_static_right.png")
-            else:
-                self.sprite = Image.open("graphics/sprites/player_sprites/player_static_left.png")
+            # 1) This makes the 3-part linear running animation (4) cycled
+            if self.vx == 0 or self.delay >= 3:
+                self.delay = 0
 
-        # 3) This makes the player flying when jumping
-        if not self.on_platform:
-            if self.vx > 0:
-                self.direction = "right"
-                self.sprite = Image.open("graphics/sprites/player_sprites/player_running_right_2.png")
-            elif self.vx < 0:
-                self.direction = "left"
-                self.sprite = Image.open("graphics/sprites/player_sprites/player_running_left_2.png")
-
-        # 4) This is a full 3-part running animation
-        if self.on_platform and self.vx != 0:
-            if self.vx > 0:
-                self.direction = "right"
-                if self.delay <= 1:
+            # 2) This makes the player static after run stopping
+            if self.on_platform and self.vx == 0:
+                if self.direction == "right":
                     self.sprite = Image.open("graphics/sprites/player_sprites/player_static_right.png")
-                elif 1 < self.delay < 2:
-                    self.sprite = Image.open("graphics/sprites/player_sprites/player_running_right_1.png")
                 else:
-                    self.sprite = Image.open("graphics/sprites/player_sprites/player_running_right_2.png")
-            else:
-                self.direction = "left"
-                if self.delay <= 1:
                     self.sprite = Image.open("graphics/sprites/player_sprites/player_static_left.png")
-                elif 1 < self.delay < 2:
-                    self.sprite = Image.open("graphics/sprites/player_sprites/player_running_left_1.png")
-                else:
+
+            # 3) This makes the player flying when jumping
+            if not self.on_platform:
+                if self.vx > 0:
+                    self.direction = "right"
+                    self.sprite = Image.open("graphics/sprites/player_sprites/player_running_right_2.png")
+                elif self.vx < 0:
+                    self.direction = "left"
                     self.sprite = Image.open("graphics/sprites/player_sprites/player_running_left_2.png")
-            self.delay += 0.2
+
+            # 4) This is a full 3-part running animation
+            if self.on_platform and self.vx != 0:
+                if self.vx > 0:
+                    self.direction = "right"
+                    if self.delay <= 1:
+                        self.sprite = Image.open("graphics/sprites/player_sprites/player_static_right.png")
+                    elif 1 < self.delay < 2:
+                        self.sprite = Image.open("graphics/sprites/player_sprites/player_running_right_1.png")
+                    else:
+                        self.sprite = Image.open("graphics/sprites/player_sprites/player_running_right_2.png")
+                else:
+                    self.direction = "left"
+                    if self.delay <= 1:
+                        self.sprite = Image.open("graphics/sprites/player_sprites/player_static_left.png")
+                    elif 1 < self.delay < 2:
+                        self.sprite = Image.open("graphics/sprites/player_sprites/player_running_left_1.png")
+                    else:
+                        self.sprite = Image.open("graphics/sprites/player_sprites/player_running_left_2.png")
+                self.delay += 0.2
 
         # 5) This makes the player falling after death
-        if not self.live:
+        else:
             if self.direction == "Right":
                 self.sprite = Image.open("graphics/sprites/player_sprites/player_running_right_2.png")
             else:
