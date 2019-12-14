@@ -35,9 +35,9 @@ class Camera:
         # self.enemies[i][1] - reference to hit box of this enemy
         for enemy in enemies:
             self.enemies.append([enemy,
-                                self.canvas.create_rectangle(enemy.x, enemy.y,
-                                                             enemy.x + enemy.width,
-                                                             enemy.y + enemy.height, fill="Red")]
+                                 self.canvas.create_rectangle(enemy.x, enemy.y,
+                                                              enemy.x + enemy.width,
+                                                              enemy.y + enemy.height, fill="Red")]
                                 )
         self.enemies_id = []
         # self.enemy_sprites = []
@@ -47,11 +47,19 @@ class Camera:
         #     self.enemies_id.append(
         #         canvas.create_image(enemy.x + enemy.width / 2, enemy.y, image=render))
 
-    def player_on_center(self):
-        """Return False if we need to center model of the player
+    def player_on_center_x(self):
+        """Return False if we need to center model of the player on the x axis
                   True if we don't need this (player is already on center)
         """
         if self.canvas.coords(self.player_hit_box)[2] < self.canvas.winfo_width() / 2 or self.player.vx < 0:
+            return False
+        return True
+
+    def player_on_center_y(self):
+        """Return False if we need to center model of the player on the y axis
+                  True if we don't need this (player is already on center)
+        """
+        if self.canvas.coords(self.player_hit_box)[3] < self.canvas.winfo_height() / 2 or self.player.vy < 0:
             return False
         return True
 
@@ -72,18 +80,41 @@ class Camera:
         render = ImageTk.PhotoImage(self.player.sprite)
         self.player_id = canvas.create_image(coordinates[0], coordinates[1], image=render)
         self.show_sprite = render
-        if self.player_on_center():
+
+        center_x = self.player_on_center_x()
+        center_y = self.player_on_center_y()
+
+        if center_x and center_y:
+            for platform in self.platforms_id:
+                self.canvas.move(platform, - self.player.vx, - self.player.vy)  # Move all platforms on the canvas
+                # to center player
+            for enemy in self.enemies:
+                self.canvas.move(enemy[1], - self.player.vx, - self.player.vy)  # Move enemies hit boxes on the canvas
+                # to center player
+
+        elif center_x:
             for platform in self.platforms_id:
                 self.canvas.move(platform, - self.player.vx, 0)  # Move all platforms on the canvas to center player
             for enemy in self.enemies:
                 self.canvas.move(enemy[1], - self.player.vx, 0)  # Move enemies hit boxes on the canvas to center player
             self.canvas.move(self.player_hit_box, 0, self.player.vy)  # Move player on the canvas y coordinate
             self.canvas.move(self.player_id, 0, self.player.vy)  # Move player on the canvas y coordinate
+
+        elif center_y:
+            for platform in self.platforms_id:
+                self.canvas.move(platform, 0, - self.player.vy)  # Move all platforms on the canvas to center player
+            for enemy in self.enemies:
+                self.canvas.move(enemy[1], 0, - self.player.vy)  # Move enemies hit boxes on the canvas to center player
+            self.canvas.move(self.player_hit_box, self.player.vx, 0)  # Move player on the canvas x coordinate
+            self.canvas.move(self.player_id, self.player.vx, 0)  # Move player on the canvas x coordinate
+
         else:
             self.canvas.move(self.player_hit_box, self.player.vx, self.player.vy)
             self.canvas.move(self.player_id, self.player.vx, self.player.vy)
+
         for enemy in self.enemies:
             self.canvas.move(enemy[1], enemy[0].vx, enemy[0].vy)  # Move enemies for their own logic
+
         if self.player.push_on_platform:
             self.player.push_on_platform = False
             self.player.vy = 0

@@ -32,13 +32,13 @@ class GameApp:
             self.key_right = 114
             self.key_up = 111
             self.key_space = 65
-        self.save_file = open("saves/save.txt", 'r+')
 
     def new_level_game(self):
-        """This method will start new level and update save file with number of the current level"""
+        """This method will start new level"""
         self.canvas.delete(ALL)
         parameters = load.load_level(self.number_of_current_level)  # Argument - number of the level
-        self.current_level = Level(self.canvas, parameters[0], parameters[1], parameters[2], parameters[3])
+        self.current_level = Level(self.canvas, parameters[0], parameters[1],
+                                   parameters[2], parameters[3], parameters[4])
         self.start_game()
 
     def bind_all(self):
@@ -79,10 +79,10 @@ class GameApp:
         """This method will increase number of current level if player finish previous one"""
         if self.number_of_current_level < self.number_of_levels:
             self.number_of_current_level += 1
-        self.save_file = open("saves/save.txt", 'r+')
-        self.save_file.truncate(0)  # Clear save file
-        self.save_file.write(str(self.number_of_current_level))
-        self.save_file.close()
+        save_file = open("saves/save.txt", 'r+')
+        save_file.truncate(0)  # Clear save file
+        save_file.write(str(self.number_of_current_level))
+        save_file.close()
         self.root.after(10000, self.new_level_game)
 
     def load_game(self):

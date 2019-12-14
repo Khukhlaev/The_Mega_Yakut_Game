@@ -33,4 +33,5 @@ def load_level(level_number):
         else:
             y -= 1
         y += 1
-    return [level_length, player, platforms, enemies]
+    level_height = y * platform_height
+    return [level_length, level_height, player, platforms, enemies]
