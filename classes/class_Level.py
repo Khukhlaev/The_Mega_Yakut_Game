@@ -97,7 +97,9 @@ class Level:
         self.player.move()
         self.check_for_enemy()
         for enemy in self.enemies:
+            enemy.check_for_player(self.player)
             self.check_for_platform(enemy, False)
+            #enemy.check_for_player(self.player)
             enemy.move()
         self.camera.update()
         if self.check_for_end():
