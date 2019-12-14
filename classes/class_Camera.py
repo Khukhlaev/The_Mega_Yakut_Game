@@ -10,9 +10,16 @@ class Camera:
         Camera class constructor
         Args:
             canvas
+            player
+            platforms - list of all platforms
+            enemies - list of all enemies
         """
         self.canvas = canvas
         self.player = player
+        self.player_hit_box = self.canvas.create_rectangle(self.player.x, self.player.y,
+                                                           self.player.x + self.player.width,
+                                                           self.player.y + self.player.height, outline="white",
+                                                           fill="white")
         self.platforms_id = []
         for platform in platforms:
             self.platforms_id.append(
@@ -21,14 +28,11 @@ class Camera:
                                              platform.y + platform.height, outline="white",
                                              fill="Green")
             )
-        self.player_hit_box = self.canvas.create_rectangle(self.player.x, self.player.y,
-                                                           self.player.x + self.player.width,
-                                                           self.player.y + self.player.height, outline="white",
-                                                           fill="white")
         render = ImageTk.PhotoImage(self.player.sprite)
         self.player_id = canvas.create_image(self.player.x + self.player.width / 2, self.player.y + 2, image=render)
         self.show_sprite = render
-        self.enemies = []
+        self.enemies = []  # self.enemies[i][0] - object from some enemy class,
+        # self.enemies[i][1] - reference to hit box of this enemy
         for enemy in enemies:
             self.enemies.append([enemy,
                                 self.canvas.create_rectangle(enemy.x, enemy.y,
