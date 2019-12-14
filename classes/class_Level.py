@@ -71,7 +71,7 @@ class Level:
                         enemy.y + enemy.height / 2 < self.player.y + self.player.height <= enemy.y + enemy.height:
                     self.player.live = False
                     self.player.on_platform = False
-                    self.player.vy = -5
+                    self.player.vy = self.platforms[0].height
                     if self.player.direction == "Right":
                         self.player.vx = -5
                     else:
@@ -92,12 +92,12 @@ class Level:
     def game(self):
         """Main method of each level game, is called every 16 ms"""
         self.check_for_platform(self.player)
-        self.check_for_enemy()
         self.player.move()
-        self.camera.update()
+        self.check_for_enemy()
         for enemy in self.enemies:
             self.check_for_platform(enemy, False)
             enemy.move()
+        self.camera.update()
         if self.check_for_end():
             self.camera.end_level()
             self.end_level = True

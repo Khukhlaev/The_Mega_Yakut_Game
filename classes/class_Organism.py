@@ -1,4 +1,4 @@
-"""It is the template class for all organisms in the game (except player)"""
+"""It is the template class for all organisms in the game"""
 from random import choice
 
 

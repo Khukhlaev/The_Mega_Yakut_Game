@@ -10,13 +10,13 @@ from classes.class_Organism import Organism
 # class body
 class Player(Organism):
     def __init__(self, x, y, width, height):
+        """
+            PLayer class constructor
+            Args:
+                (x, y) - coordinates of the top left point of the rectangle in which the model is enclosed
+                height, width - height and width of this rectangle
+        """
         super().__init__(x, y, width, height)
-        """
-        PLayer class constructor
-        Args:
-            (x, y) - coordinates of the top left point of the rectangle in which the model is enclosed
-            height, width - height and width of this rectangle
-        """
         self.vx = 0
         self.sprite = Image.open("graphics/sprites/player_sprites/player_static_right.png")
         self.direction = "right"
@@ -33,8 +33,8 @@ class Player(Organism):
         else:
             if not self.push_on_platform:
                 self.vy = gravity(self.vy, self.on_platform)
-            self.x += self.vx
-            self.y += self.vy
+        self.x += self.vx
+        self.y += self.vy
 
     def move_left(self):
         if self.live:
