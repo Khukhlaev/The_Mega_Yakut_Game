@@ -23,9 +23,9 @@ def new_game():
     app.new_level_game()
 
 
-button_new_game = tk.Button(root, text="New game", width=15, height=3, command=new_game)
+button_new_game = tk.Button(canvas, text="New game", width=15, height=3, command=new_game)
 button_new_game.pack()
-button_exit = tk.Button(root, text="Exit", width=15, height=3, command='')
+button_exit = tk.Button(canvas, text="Exit", width=15, height=3, command='')
 button_exit.pack()
 
 root.mainloop()

@@ -2,7 +2,8 @@
 
 from classes.class_Level import Level
 import load_level as load
-from tkinter import ALL
+from tkinter import ALL, Button
+from sys import platform
 
 
 class GameApp:
@@ -14,6 +15,18 @@ class GameApp:
         self.number_of_current_level = 1
         self.current_level = ''
         self.pause_status = False
+        self.button_resume = ''
+        self.button_exit = ''
+        if platform == "win32" or platform == "cygwin":
+            self.key_left = 37
+            self.key_right = 39
+            self.key_up = 38
+            self.key_space = 32
+        elif platform == "linux" or platform == "linux2":
+            self.key_left = 113
+            self.key_right = 114
+            self.key_up = 111
+            self.key_space = 65
 
     def new_level_game(self):
         """This method will start new level"""
@@ -28,13 +41,13 @@ class GameApp:
 
     def key_interpreter(self, event):
         if not self.pause_status:
-            if event.keycode == 39:
+            if event.keycode == self.key_right:
                 self.current_level.player.move_right()
-            if event.keycode == 37:
+            if event.keycode == self.key_left:
                 self.current_level.player.move_left()
-            if event.keycode == 38 and self.current_level.player.on_platform:
+            if event.keycode == self.key_up and self.current_level.player.on_platform:
                 self.current_level.player.jump()
-        if event.keycode == 32:
+        if event.keycode == self.key_space:
             self.pause()
 
     def key_release(self, event):
@@ -65,5 +78,9 @@ class GameApp:
     def pause(self):
         if not self.pause_status:
             self.pause_status = True
+            self.button_resume = Button(self.canvas, text="Resume", width=15, height=3, command=self.pause)
+            self.button_resume.pack()
+
         else:
             self.pause_status = False
+            self.button_resume.destroy()
