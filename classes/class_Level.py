@@ -7,9 +7,10 @@ from classes.class_Camera import Camera
 
 class Level:
 
-    def __init__(self, canvas, length, player, platforms, enemies):
+    def __init__(self, canvas, length, height, player, platforms, enemies):
         self.canvas = canvas
         self.length = length  # Length of the level in coordinates units
+        self.height = height  # Height of the level in coordinates units
         self.camera = Camera(canvas, player, platforms, enemies)
         self.player = player
         self.platforms = platforms
@@ -78,7 +79,7 @@ class Level:
                         self.player.vx = 5
 
     def check_for_live(self):
-        if self.player.y >= 800:
+        if self.player.y >= self.height + 100:
             return False
         else:
             return True
