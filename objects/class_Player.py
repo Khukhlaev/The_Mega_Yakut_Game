@@ -28,6 +28,7 @@ class Player(Organism):
 
     def move(self):
         if not self.live:
+            print("yes")
             self.vx = x_resistance(self.vx)
             self.vy = gravity(self.vy, False)
         else:

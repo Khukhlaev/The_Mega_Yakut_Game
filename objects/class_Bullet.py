@@ -15,7 +15,7 @@ class Bullet:
         self.live = 30
 
     def move(self):
-        "At this version bullets doesn't dissapear, they just stop"
+        """At this version bullets doesn't disappear, they just stop"""
         if self.live:
             self.x += self.vx
             self.live -= 1
