@@ -7,6 +7,7 @@ class Organism:
     def __init__(self, x, y, width, height):
         self.x = x  # It is coordinates in natural coordinate system (not canvas coordinate system)
         self.y = y
+        self.live = True
         self.width = width
         self.height = height
         self.sprite = ""

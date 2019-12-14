@@ -3,7 +3,7 @@
 """
 
 from PIL import Image
-from physics.physics import gravity
+from physics.physics import gravity, x_resistance
 from classes.class_Organism import Organism
 
 
@@ -27,20 +27,27 @@ class Player(Organism):
         self.push_x = False
 
     def move(self):
-        if not self.push_on_platform:
-            self.vy = gravity(self.vy, self.on_platform)
-        self.x += self.vx
-        self.y += self.vy
+        if not self.live:
+            self.vx = x_resistance(self.vx)
+            self.vy = gravity(self.vy, False)
+        else:
+            if not self.push_on_platform:
+                self.vy = gravity(self.vy, self.on_platform)
+            self.x += self.vx
+            self.y += self.vy
 
     def move_left(self):
-        self.vx = -5
+        if self.live:
+            self.vx = -5
 
     def move_right(self):
-        self.vx = 5
+        if self.live:
+            self.vx = 5
 
     def jump(self):
-        self.on_platform = False
-        self.vy = -10
+        if self.live:
+            self.on_platform = False
+            self.vy = -10
 
     def set_sprite(self):
         """This method changes the player's animation depending on the direction of movement """
@@ -84,3 +91,10 @@ class Player(Organism):
                 else:
                     self.sprite = Image.open("graphics/sprites/player_sprites/player_running_left_2.png")
             self.delay += 0.2
+
+        # 5) This makes the player falling after death
+        if not self.live:
+            if self.direction == "Right":
+                self.sprite = Image.open("graphics/sprites/player_sprites/player_running_right_2.png")
+            else:
+                self.sprite = Image.open("graphics/sprites/player_sprites/player_running_left_2.png")

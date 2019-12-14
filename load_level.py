@@ -1,6 +1,6 @@
 from objects.class_Player import Player
 from objects.class_Platform import Platform
-from objects.class_Policeman import Policeman
+from objects.class_Dog import Dog
 
 
 def load_level(level_number):
@@ -29,7 +29,7 @@ def load_level(level_number):
                 elif line[x] == 'P':
                     player = Player(x * platform_width, y * platform_height, player_width, player_height)
                 elif line[x] == 'e':
-                    enemies.append(Policeman(x * platform_width, y * platform_height, enemy_width, enemy_height))
+                    enemies.append(Dog(x * platform_width, y * platform_height, enemy_width, enemy_height))
         else:
             y -= 1
         y += 1

@@ -63,15 +63,25 @@ class Level:
                     break
         object.on_platform = on_platform
 
+    def check_for_enemy(self):
+        if self.player.live:
+            for enemy in self.enemies:
+                if (enemy.x <= self.player.x + self.player.width <= enemy.x + enemy.width or
+                    enemy.x <= self.player.x <= enemy.x + enemy.width) and \
+                        enemy.y + enemy.height / 2 < self.player.y + self.player.height <= enemy.y + enemy.height:
+                    self.player.live = False
+                    self.player.on_platform = False
+                    self.player.vy = -5
+                    if self.player.direction == "Right":
+                        self.player.vx = -5
+                    else:
+                        self.player.vx = 5
+
     def check_for_live(self):
         if self.player.y >= 800:
             return False
-        for enemy in self.enemies:
-            if (enemy.x <= self.player.x + self.player.width <= enemy.x + enemy.width or
-                enemy.x <= self.player.x <= enemy.x + enemy.width) and \
-                    enemy.y + enemy.height / 2 < self.player.y + self.player.height <= enemy.y + enemy.height:
-                return False
-        return True
+        else:
+            return True
 
     def check_for_end(self):
         """This method is for check if player end the level"""
@@ -82,6 +92,7 @@ class Level:
     def game(self):
         """Main method of each level game, is called every 16 ms"""
         self.check_for_platform(self.player)
+        self.check_for_enemy()
         self.player.move()
         self.camera.update()
         for enemy in self.enemies:

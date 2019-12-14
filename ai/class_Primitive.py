@@ -1,10 +1,10 @@
 """This class defines static bot's actions"""
-"""They shoot only to the left"""
 from classes.class_Organism import Organism
 from objects.class_Player import Player
-from objects.class_Bullet import import Bullet
+from objects.class_Bullet import Bullet
 
-class Static(Organism):
+
+class Primitive(Organism):
 
     def __init__(self, x, y, width, height):
         super().__init__(x, y, width, height)

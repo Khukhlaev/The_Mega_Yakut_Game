@@ -3,7 +3,7 @@ from classes.class_Organism import Organism
 from physics.physics import gravity
 
 
-class Dumb(Organism):
+class Simple(Organism):
 
     def __init__(self, x, y, width, height):
         super().__init__(x, y, width, height)
