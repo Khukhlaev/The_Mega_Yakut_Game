@@ -3,7 +3,7 @@
 from classes.class_Level import Level
 import load_level as load
 from tkinter import ALL, Button
-from sys import platform
+from sys import platform, exit
 
 
 class GameApp:
@@ -22,14 +22,20 @@ class GameApp:
             self.key_right = 39
             self.key_up = 38
             self.key_space = 32
-        elif platform == "linux" or platform == "linux2":
+        elif platform == "linux" or platform == "linux2" or platform == "linux3":
             self.key_left = 113
             self.key_right = 114
             self.key_up = 111
             self.key_space = 65
+        elif platform == "darwin":
+            self.key_left = 113
+            self.key_right = 114
+            self.key_up = 111
+            self.key_space = 65
+        self.save_file = open("saves/save.txt", 'r+')
 
     def new_level_game(self):
-        """This method will start new level"""
+        """This method will start new level and update save file with number of the current level"""
         self.canvas.delete(ALL)
         parameters = load.load_level(self.number_of_current_level)  # Argument - number of the level
         self.current_level = Level(self.canvas, parameters[0], parameters[1], parameters[2], parameters[3])
@@ -73,13 +79,26 @@ class GameApp:
         """This method will increase number of current level if player finish previous one"""
         if self.number_of_current_level < self.number_of_levels:
             self.number_of_current_level += 1
+        self.save_file = open("saves/save.txt", 'r+')
+        self.save_file.truncate(0)  # Clear save file
+        self.save_file.write(str(self.number_of_current_level))
+        self.save_file.close()
         self.root.after(10000, self.new_level_game)
+
+    def load_game(self):
+        self.number_of_current_level = int(self.save_file.read())
+        self.new_level_game()
+
+    def save_exit(self):
+        exit(0)
 
     def pause(self):
         if not self.pause_status:
             self.pause_status = True
             self.button_resume = Button(self.canvas, text="Resume", width=15, height=3, command=self.pause)
             self.button_resume.pack()
+            self.button_exit = Button(self.canvas, text="Save and exit", width=15, height=3, command=self.save_exit)
+            self.button_exit.pack()
 
         else:
             self.pause_status = False
