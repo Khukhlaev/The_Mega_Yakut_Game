@@ -11,5 +11,5 @@ class Organism:
         self.width = width
         self.height = height
         self.sprite = ""
-        self.vx = choice([3, -3])
+        self.vx = choice([-5, -5])
         self.vy = 0
