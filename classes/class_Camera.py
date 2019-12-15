@@ -39,7 +39,7 @@ class Camera:
                                                               enemy.x + enemy.width,
                                                               enemy.y + enemy.height, fill="Red")]
                                 )
-        self.enemies_id = []
+        # self.enemies_id = []
         # self.enemy_sprites = []
         # for enemy in enemies:
         #     render = ImageTk.PhotoImage(enemy.sprite)
@@ -59,7 +59,8 @@ class Camera:
         """Return False if we need to center model of the player on the y axis
                   True if we don't need this (player is already on center)
         """
-        if self.canvas.coords(self.player_hit_box)[3] < self.canvas.winfo_height() / 2 or self.player.vy < 0:
+        if self.canvas.coords(self.player_hit_box)[3] < self.canvas.winfo_height() / 2 or \
+                self.player.y < self.canvas.winfo_height() / 2:
             return False
         return True
 
