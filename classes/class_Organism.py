@@ -13,3 +13,4 @@ class Organism:
         self.sprite = ""
         self.vx = choice([-5, -5])
         self.vy = 0
+
