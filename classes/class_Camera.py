@@ -20,6 +20,16 @@ class Camera:
                                                            self.player.x + self.player.width,
                                                            self.player.y + self.player.height, outline="white",
                                                            fill="white")
+        self.enemies = []  # self.enemies[0][i] - object from some enemy class,
+        # self.enemies[1][i] - reference to hit box of this enemy,
+        # self.enemies[2][i] - reference to enemy sprite on the canvas,
+        # self.enemies[3][i] - enemy sprite (2 and 3 will append after in order to put it on foreground on the canvas)
+        for enemy in enemies:
+            self.enemies.append([enemy,
+                                 self.canvas.create_rectangle(enemy.x, enemy.y,
+                                                              enemy.x + enemy.width,
+                                                              enemy.y + enemy.height, outline="white",
+                                                              fill="white")])
         self.platforms_id = []
         for platform in platforms:
             self.platforms_id.append(
@@ -31,18 +41,10 @@ class Camera:
         render = ImageTk.PhotoImage(self.player.sprite)
         self.player_id = canvas.create_image(self.player.x + self.player.width / 2, self.player.y + 2, image=render)
         self.show_sprite = render
-        self.enemies = []  # self.enemies[0][i] - object from some enemy class,
-        # self.enemies[1][i] - reference to hit box of this enemy,
-        # self.enemies[2][i] - reference to enemy sprite on the canvas, self.enemies[3][i] - enemy sprite
-        for enemy in enemies:
-            render = ImageTk.PhotoImage(enemy.sprite)
-            self.enemies.append([enemy,
-                                 self.canvas.create_rectangle(enemy.x, enemy.y,
-                                                              enemy.x + enemy.width,
-                                                              enemy.y + enemy.height, outline="white",
-                                                              fill="white"),
-                                 self.canvas.create_image(enemy.x + enemy.width / 2,
-                                                          enemy.y, image=render), render])
+        for enemy in self.enemies:
+            render = ImageTk.PhotoImage(enemy[0].sprite)
+            enemy.append(self.canvas.create_image(enemy[0].x + enemy[0].width / 2, enemy[0].y, image=render))
+            enemy.append(render)
 
     def player_on_center_x(self):
         """Return False if we need to center model of the player on the x axis
