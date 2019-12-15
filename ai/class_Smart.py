@@ -13,7 +13,7 @@ class Smart(Organism):
         self.push_under_platform = False
         self.counter = 0  # counter to understand if bot has jumped from platform
         self.dist = 0  # current distance from start
-        self.max = 510  # max distance from start
+        self.max = 500  # max distance from start
         self.vision = 500  # max distance to react on player in pixels
 
     def move(self):
@@ -23,10 +23,10 @@ class Smart(Organism):
             if self.dist >= self.max:
                 self.vx = -self.vx
                 self.dist = 0
-                self.max = 150
+                self.max = 500
         if not self.on_place and (self.counter % 2 == 0):
             self.vy = gravity(self.vy, self.on_platform)
-        elif not self.on_platform and (self.counter % 2 != 0):
+        elif not self.on_platform and (self.counter % 2 != 0) and self.on_place:
             self.vy = -10
             self.on_place = False
             self.counter += 1
@@ -36,7 +36,7 @@ class Smart(Organism):
 
     def check_for_player(self, player):
         """This method detects player and make bot moving towards him"""
-        if (self.x - player.x) ** 2 <= self.vision ** 2 and player.x - self.x != 0:
+        if (self.x - player.x) ** 2 + (self.y - player.y)**2 <= self.vision ** 2 and player.x - self.x != 0:
             self.vx = 5 * (player.x - self.x) / abs(player.x - self.x)
         else:
             self.vx = 0
