@@ -21,3 +21,6 @@ class Simple(Organism):
             self.vy = gravity(self.vy, self.on_platform)
         self.x += self.vx
         self.y += self.vy
+
+    def check_for_player(self, player):
+        pass

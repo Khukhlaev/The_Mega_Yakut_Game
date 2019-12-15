@@ -28,6 +28,8 @@ class Dog(Simple):
             # 2) This shows attacking sprite
             if self.player_in_touch:
                 if self.vx > 0:
+                    self.vx = 0
                     self.sprite = Image.open("graphics/sprites/dog_sprites/dog_attacking_right.png")
                 elif self.vx < 0:
+                    self.vx = 0
                     self.sprite = Image.open("graphics/sprites/dog_sprites/dog_attacking_left.png")
