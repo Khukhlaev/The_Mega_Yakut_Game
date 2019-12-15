@@ -32,8 +32,6 @@ class Camera:
         self.player_id = canvas.create_image(self.player.x + self.player.width / 2, self.player.y + 2, image=render)
         self.show_sprite = render
         self.enemies = []  # self.enemies[i][0] - object from some enemy class,
-        self.enemies_id = []
-        self.enemies_show_sprite = []
         # self.enemies[i][1] - reference to hit box of this enemy
         for enemy in enemies:
             self.enemies.append([enemy,
@@ -41,10 +39,6 @@ class Camera:
                                                               enemy.x + enemy.width,
                                                               enemy.y + enemy.height, fill="Red")]
                                 )
-            render_enemy = ImageTk.PhotoImage(enemy.sprite)
-            self.enemies_id.append(
-                canvas.create_image(enemy.x + enemy.width / 2, enemy.y + 2, image=render_enemy))
-            self.enemies_show_sprite.append(render_enemy)
         # self.enemies_id = []
         # self.enemy_sprites = []
         # for enemy in enemies:
@@ -83,21 +77,10 @@ class Camera:
         canvas = self.canvas
         coordinates = self.canvas.coords(self.player_id)
         self.player.set_sprite()
-        for enemy in self.enemies:
-            enemy[0].set_sprite()
         canvas.delete(self.player_id)
         render = ImageTk.PhotoImage(self.player.sprite)
         self.player_id = canvas.create_image(coordinates[0], coordinates[1], image=render)
         self.show_sprite = render
-        for enemy in self.enemies_id:
-            canvas.delete(enemy)
-        self.enemies_show_sprite = []
-        self.enemies_id = []
-        for enemy in self.enemies_id:
-            render_enemy = ImageTk.PhotoImage(enemy.sprite)
-            self.enemies_id.append(
-                canvas.create_image(enemy.x + enemy.width / 2, enemy.y + 2, image=render_enemy))
-            self.enemies_show_sprite.append(render_enemy)
 
         center_x = self.player_on_center_x()
         center_y = self.player_on_center_y()
