@@ -71,6 +71,7 @@ class Level:
                     enemy.x <= self.player.x <= enemy.x + enemy.width) and \
                         enemy.y + enemy.height / 2 < self.player.y + self.player.height <= enemy.y + enemy.height:
                     self.player.live = False
+                    enemy.player_in_touch = True
                     self.player.on_platform = False
                     self.player.vy = -5
                     if self.player.direction == "right":
