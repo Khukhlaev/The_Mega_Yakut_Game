@@ -1,6 +1,7 @@
 from objects.class_Player import Player
 from objects.class_Platform import Platform
 from objects.class_Dog import Dog
+from objects.class_Policeman import Policeman
 
 
 def load_level(level_number):
@@ -14,8 +15,10 @@ def load_level(level_number):
     platform_width = int(level_file.readline().split()[0])
     player_height = int(level_file.readline().split()[0])
     player_width = int(level_file.readline().split()[0])
-    enemy_height = int(level_file.readline().split()[0])
-    enemy_width = int(level_file.readline().split()[0])
+    dog_height = int(level_file.readline().split()[0])
+    dog_width = int(level_file.readline().split()[0])
+    policeman_height = int(level_file.readline().split()[0])
+    policeman_width = int(level_file.readline().split()[0])
     level_length *= platform_width
     platforms = []
     enemies = []
@@ -28,8 +31,11 @@ def load_level(level_number):
                     platforms.append(Platform(x * platform_width, y * platform_height, platform_width, platform_height))
                 elif line[x] == 'P':
                     player = Player(x * platform_width, y * platform_height, player_width, player_height)
-                elif line[x] == 'e':
-                    enemies.append(Dog(x * platform_width, y * platform_height, enemy_width, enemy_height))
+                elif line[x] == 'D':
+                    enemies.append(Dog(x * platform_width, y * platform_height, dog_width, dog_height))
+                elif line[x] == 'M':
+                    enemies.append(Policeman(x * platform_width, y * platform_height,
+                                             policeman_width, policeman_height))
         else:
             y -= 1
         y += 1
