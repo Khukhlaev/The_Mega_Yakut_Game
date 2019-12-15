@@ -1,5 +1,5 @@
 G = 0.5  # gravity acceleration per frame
-K = 0.2  # x_resistance acceleration per frame
+K = 0.05  # x_resistance acceleration per frame
 
 
 def gravity(vy, on_platform):
