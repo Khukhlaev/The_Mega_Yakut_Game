@@ -36,7 +36,9 @@ class Complicated(Organism):
 
     def check_for_player(self, player):
         """This method detects player and make bot moving towards him"""
-        if (self.x - player.x) ** 2 + (self.y - player.y)**2 <= self.vision ** 2 and player.x - self.x != 0:
+        if (self.x - player.x) ** 2 + (self.y - player.y) ** 2 <= self.vision ** 2 and player.x - self.x != 0:
             self.vx = 5 * (player.x - self.x) / abs(player.x - self.x)
+            return True
         else:
             self.vx = 0
+            return False
