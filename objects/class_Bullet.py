@@ -19,6 +19,7 @@ class Bullet:
         if self.live:
             self.x += self.vx
             self.live -= 1
-
+        else:
+            self.vx = 0
 
 

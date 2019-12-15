@@ -13,11 +13,4 @@ class Organism:
         self.sprite = ""
         self.vx = choice([-5, -5])
         self.vy = 0
-        self.vision = 150  # max distance to react on player
-    def check_for_player(self, Player):
-        """This method detects player and make bot moving towards him"""
-        if (self.x - Player.x)**2 <= self.vision**2:
-            self.vx = 5*(Player.x - self.x)/abs(Player.x - self.x)
-        else:
-            self.vx = 0
 
