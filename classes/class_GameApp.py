@@ -4,6 +4,7 @@ from classes.class_Level import Level
 import load_level as load
 from tkinter import ALL, Button
 from sys import platform, exit
+from time import clock
 
 
 class GameApp:
@@ -32,6 +33,7 @@ class GameApp:
             self.key_right = 114
             self.key_up = 111
             self.key_space = 65
+        clock()  # For Windows, because there clock() returns time since first time when this function is called
 
     def new_level_game(self):
         """This method will start new level"""
@@ -61,11 +63,15 @@ class GameApp:
             self.current_level.player.vx = 0
 
     def game_tic(self):
+        """This is main method of each game"""
+        time1 = clock()  # Time before game iteration (before all logical operations)
         if not self.pause_status:
             self.current_level.game()
         player_live = self.current_level.check_for_live()
+        time2 = clock()  # Time after game iteration (after all logical operations)
+        time = int(24 - (time2 - time1) * 1000)  # This iteration time
         if not self.current_level.end_level and player_live:
-            self.root.after(16, self.game_tic)
+            self.root.after(time, self.game_tic)
         elif self.current_level.end_level:
             self.new_level()
         else:
@@ -86,7 +92,9 @@ class GameApp:
         self.root.after(10000, self.new_level_game)
 
     def load_game(self):
-        self.number_of_current_level = int(self.save_file.read())
+        save_file = open("saves/save.txt", 'r+')
+        self.number_of_current_level = int(save_file.read())
+        save_file.close()
         self.new_level_game()
 
     def save_exit(self):
@@ -103,3 +111,4 @@ class GameApp:
         else:
             self.pause_status = False
             self.button_resume.destroy()
+            self.button_exit.destroy()

@@ -1,7 +1,7 @@
 """This class defines static bot's actions"""
 from classes.class_Organism import Organism
 from objects.class_Player import Player
-from objects.class_Bullet import Bullet
+
 
 class Primitive(Organism):
 
@@ -17,3 +17,4 @@ class Primitive(Organism):
         """Shoot if player is in shoot range higher than bot, but there is no limit for number of bullet
          but there is no limit for number of bullets. Actually it doesn't shoot, to shoot create Dog(Bullet) class"""
         if (self.x - Player.x <= self.shoot_range) and (Player.y - self.y >= 0):
+            pass

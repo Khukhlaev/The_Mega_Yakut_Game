@@ -3,6 +3,7 @@ from ai.class_Simple import Simple
 from PIL import Image
 from ai.class_Smart import Smart
 
+
 class Dog(Smart):
 
     def __init__(self, x, y, width, height):
