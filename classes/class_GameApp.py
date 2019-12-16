@@ -29,10 +29,10 @@ class GameApp:
             self.key_up = 111
             self.key_space = 65
         elif platform == "darwin":
-            self.key_left = 113
-            self.key_right = 114
-            self.key_up = 111
-            self.key_space = 65
+            self.key_left = 8124162
+            self.key_right = 8189699
+            self.key_up = 8320768
+            self.key_space = 32
         clock()  # For Windows, because there clock() returns time since first time when this function is called
 
     def new_level_game(self):

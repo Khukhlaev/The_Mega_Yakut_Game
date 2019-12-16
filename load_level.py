@@ -10,7 +10,6 @@ def load_level(level_number):
     Args: level number
     """
     level_file = open('levels/level' + str(level_number) + '.txt', 'r')
-    level_length = int(level_file.readline().split()[0])
     platform_height = int(level_file.readline().split()[0])
     platform_width = int(level_file.readline().split()[0])
     player_height = int(level_file.readline().split()[0])
@@ -19,11 +18,11 @@ def load_level(level_number):
     dog_width = int(level_file.readline().split()[0])
     policeman_height = int(level_file.readline().split()[0])
     policeman_width = int(level_file.readline().split()[0])
-    level_length *= platform_width
     platforms = []
     enemies = []
     player = ""
     y = 0
+    length = 0
     for line in level_file:
         if line[0] != '[' and line[0] != ']':
             for x in range(len(line)):
@@ -36,8 +35,11 @@ def load_level(level_number):
                 elif line[x] == 'M':
                     enemies.append(Policeman(x * platform_width, y * platform_height,
                                              policeman_width, policeman_height))
+                elif line[x] == "|":
+                    length = max(length, x)
         else:
             y -= 1
         y += 1
     level_height = y * platform_height
+    level_length = length * platform_width
     return [level_length, level_height, player, platforms, enemies]
