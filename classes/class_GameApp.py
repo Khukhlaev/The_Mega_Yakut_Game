@@ -4,7 +4,7 @@ from classes.class_Level import Level
 import load_level as load
 from tkinter import ALL, Button
 from sys import platform, exit
-from time import clock
+from time import perf_counter
 
 
 class GameApp:
@@ -33,7 +33,6 @@ class GameApp:
             self.key_right = 8189699
             self.key_up = 8320768
             self.key_space = 32
-        clock()  # For Windows, because there clock() returns time since first time when this function is called
 
     def new_level_game(self):
         """This method will start new level"""
@@ -64,11 +63,11 @@ class GameApp:
 
     def game_tic(self):
         """This is main method of each game"""
-        time1 = clock()  # Time before game iteration (before all logical operations)
+        time1 = perf_counter()  # Time before game iteration (before all logical operations)
         if not self.pause_status:
             self.current_level.game()
         player_live = self.current_level.check_for_live()
-        time2 = clock()  # Time after game iteration (after all logical operations)
+        time2 = perf_counter()  # Time after game iteration (after all logical operations)
         time = int(24 - (time2 - time1) * 1000)  # This iteration time
         if not self.current_level.end_level and player_live:
             self.root.after(time, self.game_tic)
