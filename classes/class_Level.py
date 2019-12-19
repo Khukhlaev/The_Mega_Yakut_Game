@@ -103,5 +103,4 @@ class Level:
             enemy.move()
         self.camera.update()
         if self.check_for_end():
-            self.camera.end_level()
             self.end_level = True

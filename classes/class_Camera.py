@@ -63,14 +63,6 @@ class Camera:
             return False
         return True
 
-    def end_level(self):
-        self.canvas.create_text(self.canvas.winfo_width() - 400, 200,
-                                text="Thank you Yakut!",
-                                font="Arial 20", fill="red")
-        self.canvas.create_text(self.canvas.winfo_width() - 400, 250,
-                                text="But your president is in the another city! ",
-                                font="Arial 20", fill="red")
-
     def update(self):
         """This method is responsible for opening a new part of the world when player reaches middle of the window"""
         canvas = self.canvas
