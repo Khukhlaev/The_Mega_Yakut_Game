@@ -173,13 +173,13 @@ class GameApp:
         self.canvas.create_text(self.canvas.winfo_width() - 400, 350,
                                 text="and Mikhail Yaushev",
                                 font="Arial 20", fill="red", justify=CENTER)
-        self.canvas.create_text(self.canvas.winfo_width() - 400, 350,
+        self.canvas.create_text(self.canvas.winfo_width() - 400, 400,
                                 text="Designed in RGB Artworks",
                                 font="Arial 20", fill="red", justify=CENTER)
-        self.canvas.create_text(self.canvas.winfo_width() - 400, 400,
+        self.canvas.create_text(self.canvas.winfo_width() - 400, 450,
                                 text="vk.com/rgbarts",
                                 font="Arial 20", fill="red", justify=CENTER)
-        self.canvas.create_text(self.canvas.winfo_width() - 400, 450,
+        self.canvas.create_text(self.canvas.winfo_width() - 400, 500,
                                 text="Wish you the best for the future!",
                                 font="Arial 20", fill="red", justify=CENTER)
         self.root.after(10000, self.main_menu)
