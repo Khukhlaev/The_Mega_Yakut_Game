@@ -87,7 +87,7 @@ class Level:
 
     def check_for_end(self):
         """This method is for check if player end the level"""
-        if self.player.x + self.player.width >= self.length:
+        if self.player.x + self.player.width >= self.length + 50:
             return True
         return False
 
@@ -103,5 +103,4 @@ class Level:
             enemy.move()
         self.camera.update()
         if self.check_for_end():
-            self.camera.end_level()
             self.end_level = True
