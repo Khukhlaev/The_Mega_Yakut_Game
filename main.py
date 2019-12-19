@@ -5,7 +5,7 @@ from sys import exit
 # make constants
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
-NUMBER_OF_LEVELS = 2
+NUMBER_OF_LEVELS = 5
 
 # make window
 root = tk.Tk()
