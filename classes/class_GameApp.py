@@ -93,7 +93,7 @@ class GameApp:
             self.canvas.create_text(self.canvas.winfo_width() - 400, 250,
                                     text="But your president is in the another city! ",
                                     font="Arial 20", fill="red", justify=CENTER)
-            self.root.after(8000, self.new_level_game)
+            self.root.after(4000, self.new_level_game)
         else:
             self.game_over()
 
@@ -173,8 +173,13 @@ class GameApp:
         self.canvas.create_text(self.canvas.winfo_width() - 400, 350,
                                 text="and Mikhail Yaushev",
                                 font="Arial 20", fill="red", justify=CENTER)
+        self.canvas.create_text(self.canvas.winfo_width() - 400, 350,
+                                text="Designed in RGB Artworks",
+                                font="Arial 20", fill="red", justify=CENTER)
         self.canvas.create_text(self.canvas.winfo_width() - 400, 400,
+                                text="vk.com/rgbarts",
+                                font="Arial 20", fill="red", justify=CENTER)
+        self.canvas.create_text(self.canvas.winfo_width() - 400, 450,
                                 text="Wish you the best for the future!",
                                 font="Arial 20", fill="red", justify=CENTER)
         self.root.after(10000, self.main_menu)
-

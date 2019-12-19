@@ -1,4 +1,3 @@
-70  - It is the level length in numbers of platforms width
 30 - It is the platforms height
 50 - It is the platforms width
 50 - It is the player's hit box height

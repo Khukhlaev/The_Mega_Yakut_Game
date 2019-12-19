@@ -23,6 +23,3 @@ class Policeman(Complicated):
             elif self.vx < 0:
                 self.direction = "left"
                 self.sprite = Image.open("graphics/sprites/policeman_sprites/policeman_running_left.png")
-
-            # 2) This makes the policeman static if he doesn't see the player
-            pass

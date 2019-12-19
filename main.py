@@ -10,6 +10,8 @@ NUMBER_OF_LEVELS = 5
 root = tk.Tk()
 root.title('The Mega Yakut Game')
 root.geometry(str(WINDOW_WIDTH) + "x" + str(WINDOW_HEIGHT))
+root.overrideredirect(1)
+root.state('zoomed')
 canvas = tk.Canvas(root, bg='white')
 canvas.pack(fill=tk.BOTH, expand=1)
 canvas.update()
